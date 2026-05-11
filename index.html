@@ -7,7 +7,7 @@
     <meta name="description" content="Gere provas irrefutáveis de diligência com o único sistema com validade forense do Brasil.">
     
     <!-- Favicon -->
-    <link rel="icon" href="https://via.placeholder.com/32/00D18E/1E3A5F?text=H" type="image/png">
+    <link rel="icon" href="https://via.placeholder.com/32/50A8FB/1D3C59?text=H" type="image/png">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,11 +27,13 @@
                 extend: {
                     colors: {
                         hiro: {
+                            primary: '#50A8FB',
+                            primaryHover: '#3A92E3',
+                            secondary: '#1D3C59',
+                            secondaryDark: '#122639',
+                            tertiary: '#FFFFFF',
                             green: '#00D18E',
                             greenHover: '#00b37a',
-                            blue: '#1E3A5F',      /* Primary Blue da Identidade */
-                            navy: '#0A1628',      /* Navy da Identidade */
-                            cardBlue: '#152C48',  /* Tom intermediário para cards */
                             gray: '#8D8D8D',
                             light: '#F5F5F5',
                             appbg: '#f8fafc'
@@ -81,32 +83,33 @@
             -webkit-font-smoothing: antialiased; 
             -moz-osx-font-smoothing: grayscale; 
             overflow-x: hidden;
+            background-color: #122639;
         }
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0A1628; }
-        ::-webkit-scrollbar-thumb { background: #00D18E; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #00b37a; }
+        ::-webkit-scrollbar-track { background: #122639; }
+        ::-webkit-scrollbar-thumb { background: #50A8FB; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3A92E3; }
 
         /* Typography utilities */
         .text-balance { text-wrap: balance; }
         .text-pretty { text-wrap: pretty; }
 
-        /* Glassmorphism Refinado - Ajustado para o Azul da HIRO */
+        /* Glassmorphism Refinado com a nova Secundária */
         .glass-card {
-            background: rgba(30, 58, 95, 0.4);
+            background: rgba(29, 60, 89, 0.45);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
         }
 
         /* Mockup dos celulares Responsivos */
         .phone-mockup {
-            box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.5);
-            border: 6px solid #1E3A5F;
+            box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.7);
+            border: 6px solid #1D3C59;
             border-radius: 2.5rem;
             overflow: hidden;
-            background-color: white;
+            background-color: #FFFFFF;
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -166,7 +169,7 @@
         input:-webkit-autofill:focus, 
         input:-webkit-autofill:active,
         select:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0 30px #152C48 inset !important;
+            -webkit-box-shadow: 0 0 0 30px #122639 inset !important;
             -webkit-text-fill-color: white !important;
             transition: background-color 5000s ease-in-out 0s;
         }
@@ -177,7 +180,7 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
-<body class="bg-hiro-navy text-white selection:bg-hiro-green selection:text-hiro-navy">
+<body class="bg-hiro-secondaryDark text-white selection:bg-hiro-primary selection:text-hiro-tertiary">
     <div id="root"></div>
 
     <script type="text/babel">
@@ -238,11 +241,9 @@
             const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '', role: '', company: '', size: '' });
 
             useEffect(() => {
-                // Header Scroll Effect
                 const handleScroll = () => setIsScrolled(window.scrollY > 40);
                 window.addEventListener('scroll', handleScroll, { passive: true });
 
-                // Reveal Animations
                 const observerOptions = {
                     root: null,
                     threshold: 0.1,
@@ -264,7 +265,6 @@
                     });
                 }, 100);
 
-                // Parallax Otimizado
                 let ticking = false;
                 const handleParallax = () => {
                     if (!ticking) {
@@ -281,7 +281,6 @@
                                     const offset = (windowHeight / 2) - (rect.top + rect.height / 2);
                                     const speed = parseFloat(wrapper.getAttribute('data-speed')) || 0.15;
                                     const yPos = offset * speed;
-                                    
                                     wrapper.style.transform = `translate3d(0, ${yPos}px, 0)`;
                                 }
                             });
@@ -326,7 +325,7 @@
                     {/* --- HEADER FLUTUANTE --- */}
                     <header className={`fixed z-50 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-7xl rounded-full transition-all duration-500 flex justify-between items-center px-4 py-3 sm:px-6 sm:py-4 ${
                         isScrolled 
-                        ? 'top-2 sm:top-4 bg-white/95 backdrop-blur-xl border border-hiro-blue/10 shadow-[0_15px_30px_-10px_rgba(30,58,95,0.15)] text-hiro-navy' 
+                        ? 'top-2 sm:top-4 bg-white/95 backdrop-blur-xl border border-hiro-secondary/10 shadow-[0_15px_30px_-10px_rgba(29,60,89,0.2)] text-hiro-secondary' 
                         : 'top-4 sm:top-6 bg-white/5 backdrop-blur-sm border border-white/20 text-white'
                     }`}>
                         <a href="#inicio" onClick={(e) => scrollToSection(e, 'inicio')} className="flex items-center transition-transform hover:scale-105">
@@ -343,7 +342,7 @@
                                 const id = item.toLowerCase().replace(/ /g, '-').replace(/ó/g, 'o');
                                 return (
                                     <a key={item} href={`#${id}`} onClick={(e) => scrollToSection(e, id)} 
-                                       className={`text-[11px] xl:text-xs font-bold uppercase tracking-widest transition-all hover:text-hiro-green hover:-translate-y-0.5 ${isScrolled ? 'text-hiro-navy' : 'text-gray-300 hover:text-white'}`}>
+                                       className={`text-[11px] xl:text-xs font-bold uppercase tracking-widest transition-all hover:text-hiro-primary hover:-translate-y-0.5 ${isScrolled ? 'text-hiro-secondary' : 'text-gray-200 hover:text-white'}`}>
                                         {item}
                                     </a>
                                 )
@@ -352,12 +351,12 @@
 
                         {/* CTA Desktop */}
                         <a href="#contato" onClick={(e) => scrollToSection(e, 'contato')} 
-                           className="hidden lg:inline-flex bg-hiro-green hover:bg-hiro-greenHover text-hiro-navy px-5 xl:px-6 py-3 rounded-full font-black uppercase tracking-widest text-[10px] xl:text-[11px] items-center gap-2 transition-all hover:scale-105 shadow-[0_4px_20px_rgba(0,209,142,0.3)]">
+                           className="hidden lg:inline-flex bg-hiro-green hover:bg-hiro-greenHover text-hiro-secondaryDark px-5 xl:px-6 py-3 rounded-full font-black uppercase tracking-widest text-[10px] xl:text-[11px] items-center gap-2 transition-all hover:scale-105 shadow-[0_4px_20px_rgba(0,209,142,0.3)]">
                             Falar com Especialista <i className="ph-bold ph-arrow-right text-base"></i>
                         </a>
 
                         <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors">
-                            <i className={`ph-bold ${isMobileMenuOpen ? 'ph-x' : 'ph-list'} text-2xl ${isScrolled ? 'text-hiro-navy' : 'text-white'}`}></i>
+                            <i className={`ph-bold ${isMobileMenuOpen ? 'ph-x' : 'ph-list'} text-2xl ${isScrolled ? 'text-hiro-secondary' : 'text-white'}`}></i>
                         </button>
 
                         {/* Menu Mobile */}
@@ -368,7 +367,7 @@
                                 const id = item.toLowerCase().replace(/ /g, '-').replace(/ó/g, 'o');
                                 return (
                                     <a key={item} href={`#${id}`} onClick={(e) => scrollToSection(e, id)} 
-                                       className="px-6 py-4 border-b border-gray-100 text-sm font-black uppercase tracking-widest text-hiro-blue hover:text-hiro-green hover:bg-gray-50 transition-colors">
+                                       className="px-6 py-4 border-b border-gray-100 text-sm font-black uppercase tracking-widest text-hiro-secondary hover:text-hiro-primary hover:bg-gray-50 transition-colors">
                                         {item}
                                     </a>
                                 )
@@ -377,20 +376,20 @@
                     </header>
 
                     {/* --- 1. HERO SECTION (CLEAN & MODERN, STICKY PARA EFEITO CORTINA) --- */}
-                    <section id="inicio" className="sticky top-0 z-0 w-full flex items-center min-h-[100svh] pt-32 pb-20 overflow-hidden bg-hiro-blue">
+                    <section id="inicio" className="sticky top-0 z-0 w-full flex items-center min-h-[100svh] pt-32 pb-20 overflow-hidden bg-hiro-secondary">
                         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
                             
                             {/* Copy Hero */}
                             <div className="w-full lg:w-1/2 text-center lg:text-left reveal-left">
-                                <div className="inline-flex items-center gap-2 py-1.5 px-3 rounded border border-white/10 bg-hiro-navy/30 text-hiro-green font-bold text-[10px] md:text-xs tracking-widest uppercase mb-8 shadow-sm">
-                                    <div className="w-2 h-2 rounded-full bg-hiro-green"></div>
+                                <div className="inline-flex items-center gap-2 py-1.5 px-3 rounded border border-white/10 bg-hiro-secondaryDark/50 text-hiro-primary font-bold text-[10px] md:text-xs tracking-widest uppercase mb-8 shadow-sm">
+                                    <div className="w-2 h-2 rounded-full bg-hiro-primary"></div>
                                     SOFTWARE RH NR-1 COMPLIANCE
                                 </div>
                                 
                                 <h1 className="text-[2.75rem] sm:text-5xl lg:text-[4.8rem] font-black tracking-tighter mb-6 leading-[1.05] text-white text-balance text-left mx-auto lg:mx-0">
                                     Único sistema <br className="hidden sm:block"/>
                                     de validade <br className="hidden sm:block"/>
-                                    <span className="text-[#C4D2FE]">forense do <br className="hidden sm:block"/> Brasil</span>
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-hiro-primary to-[#A3D3FF]">forense do <br className="hidden sm:block"/> Brasil</span>
                                 </h1>
                                 
                                 <p className="text-lg md:text-xl mb-10 font-medium text-gray-200 max-w-xl mx-auto lg:mx-0 leading-relaxed text-pretty text-left">
@@ -398,11 +397,11 @@
                                 </p>
                                 
                                 <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-6 w-full">
-                                    <a href="#contato" onClick={(e) => scrollToSection(e, 'contato')} className="bg-hiro-green text-hiro-navy hover:bg-hiro-greenHover font-bold py-4 px-8 rounded text-sm sm:text-base transition-colors flex justify-center items-center w-full sm:w-auto shadow-[0_10px_30px_rgba(0,209,142,0.3)] hover:-translate-y-1 transform duration-300">
+                                    <a href="#contato" onClick={(e) => scrollToSection(e, 'contato')} className="bg-hiro-green text-hiro-secondaryDark hover:bg-hiro-greenHover font-bold py-4 px-8 rounded text-sm sm:text-base transition-colors flex justify-center items-center w-full sm:w-auto shadow-[0_10px_30px_rgba(0,209,142,0.3)] hover:-translate-y-1 transform duration-300">
                                         Quero saber mais
                                     </a>
-                                    <button onClick={() => setIsVideoModalOpen(true)} className="flex items-center justify-center gap-3 text-white font-bold hover:text-hiro-green transition-colors group">
-                                        <div className="w-10 h-10 border-2 border-white group-hover:border-hiro-green rounded-full flex items-center justify-center transition-colors">
+                                    <button onClick={() => setIsVideoModalOpen(true)} className="flex items-center justify-center gap-3 text-white font-bold hover:text-hiro-primary transition-colors group">
+                                        <div className="w-10 h-10 border-2 border-white group-hover:border-hiro-primary rounded-full flex items-center justify-center transition-colors">
                                             <i className="ph-fill ph-play ml-1 text-sm"></i>
                                         </div>
                                         Ver como funciona
@@ -412,15 +411,15 @@
 
                             {/* Card Status de Conformidade */}
                             <div className="w-full lg:w-1/2 relative reveal-right delay-200 max-w-md mx-auto lg:max-w-none">
-                                <div className="bg-hiro-cardBlue w-full rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden relative z-10 flex flex-col border border-white/5">
+                                <div className="bg-[#224769] w-full rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden relative z-10 flex flex-col border border-white/10">
                                     {/* Mac OS Header */}
-                                    <div className="h-10 bg-hiro-navy border-b border-white/5 flex items-center px-4 relative">
+                                    <div className="h-10 bg-hiro-secondaryDark border-b border-white/10 flex items-center px-4 relative">
                                         <div className="flex gap-2">
                                             <div className="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
                                             <div className="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
                                             <div className="w-3 h-3 rounded-full bg-[#27C93F]"></div>
                                         </div>
-                                        <div className="absolute left-1/2 transform -translate-x-1/2 bg-[#112238] px-4 py-1 rounded text-[10px] font-medium text-gray-400">
+                                        <div className="absolute left-1/2 transform -translate-x-1/2 bg-hiro-secondary px-4 py-1 rounded text-[10px] font-medium text-gray-300">
                                             hiro.app/governance
                                         </div>
                                     </div>
@@ -431,22 +430,22 @@
                                                 <h3 className="text-white font-bold text-xl md:text-2xl tracking-tight">Status de Conformidade</h3>
                                                 <p className="text-gray-300 text-sm mt-1">Auditoria Contínua Ativa</p>
                                             </div>
-                                            <div className="border border-hiro-green px-3 py-1.5 flex items-center gap-2 rounded">
-                                                <i className="ph-bold ph-shield-check text-hiro-green text-sm"></i>
-                                                <span className="text-hiro-green text-[10px] font-bold uppercase tracking-wider">Auditado ICP-Brasil</span>
+                                            <div className="border border-hiro-primary px-3 py-1.5 flex items-center gap-2 rounded">
+                                                <i className="ph-bold ph-shield-check text-hiro-primary text-sm"></i>
+                                                <span className="text-hiro-primary text-[10px] font-bold uppercase tracking-wider">Auditado ICP-Brasil</span>
                                             </div>
                                         </div>
 
                                         <div className="grid grid-cols-2 gap-4 mb-8">
-                                            <div className="bg-hiro-navy/60 p-5 rounded-lg border border-white/5">
-                                                <p className="text-gray-400 text-xs mb-2">Risco Psicossocial (Nível)</p>
+                                            <div className="bg-hiro-secondaryDark/40 p-5 rounded-lg border border-white/5">
+                                                <p className="text-gray-300 text-xs mb-2">Risco Psicossocial (Nível)</p>
                                                 <div className="flex items-center gap-3">
                                                     <span className="text-3xl font-black text-white">Baixo</span>
-                                                    <i className="ph-bold ph-activity text-hiro-green text-xl"></i>
+                                                    <i className="ph-bold ph-activity text-hiro-primary text-xl"></i>
                                                 </div>
                                             </div>
-                                            <div className="bg-hiro-navy/60 p-5 rounded-lg border border-white/5">
-                                                <p className="text-gray-400 text-xs mb-2">Evidências Criptografadas</p>
+                                            <div className="bg-hiro-secondaryDark/40 p-5 rounded-lg border border-white/5">
+                                                <p className="text-gray-300 text-xs mb-2">Evidências Criptografadas</p>
                                                 <div className="flex items-center gap-3">
                                                     <span className="text-3xl font-black text-white">12.4k</span>
                                                     <i className="ph-bold ph-lock-key text-gray-400 text-xl"></i>
@@ -456,26 +455,26 @@
 
                                         <div className="space-y-4 mb-4">
                                             <div className="flex items-center gap-4">
-                                                <div className="w-2.5 h-2.5 rounded-full bg-hiro-green shrink-0"></div>
-                                                <div className="flex-1 h-8 bg-hiro-navy/60 relative rounded overflow-hidden flex items-center">
-                                                    <div className="absolute top-0 left-0 h-full w-[80%] bg-hiro-green/20 border-r border-hiro-green"></div>
+                                                <div className="w-2.5 h-2.5 rounded-full bg-hiro-primary shrink-0"></div>
+                                                <div className="flex-1 h-8 bg-hiro-secondaryDark/60 relative rounded overflow-hidden flex items-center">
+                                                    <div className="absolute top-0 left-0 h-full w-[80%] bg-hiro-primary/20 border-r border-hiro-primary"></div>
                                                     <span className="relative z-10 left-3 text-[11px] text-white font-medium">Mapeamento Climático Realizado</span>
                                                 </div>
-                                                <span className="text-[10px] text-gray-400 font-mono shrink-0 w-14 text-right">10:42 AM</span>
+                                                <span className="text-[10px] text-gray-300 font-mono shrink-0 w-14 text-right">10:42 AM</span>
                                             </div>
                                             <div className="flex items-center gap-4">
-                                                <div className="w-2.5 h-2.5 rounded-full bg-[#4285F4] shrink-0"></div>
-                                                <div className="flex-1 h-8 bg-hiro-navy/60 relative rounded overflow-hidden flex items-center">
-                                                    <div className="absolute top-0 left-[20%] h-full w-[40%] bg-[#4285F4]/20 border-r border-[#4285F4]"></div>
+                                                <div className="w-2.5 h-2.5 rounded-full bg-[#A3D3FF] shrink-0"></div>
+                                                <div className="flex-1 h-8 bg-hiro-secondaryDark/60 relative rounded overflow-hidden flex items-center">
+                                                    <div className="absolute top-0 left-[20%] h-full w-[40%] bg-[#A3D3FF]/20 border-r border-[#A3D3FF]"></div>
                                                     <span className="relative z-10 left-[23%] text-[11px] text-white font-medium">Intervenção Liderança</span>
                                                 </div>
-                                                <span className="text-[10px] text-gray-400 font-mono shrink-0 w-14 text-right">11:15 AM</span>
+                                                <span className="text-[10px] text-gray-300 font-mono shrink-0 w-14 text-right">11:15 AM</span>
                                             </div>
                                         </div>
 
                                         <div className="flex justify-end mt-2">
-                                            <div className="bg-hiro-navy/60 p-2.5 rounded-full border border-white/5">
-                                                <i className="ph-bold ph-fingerprint text-hiro-green text-xl"></i>
+                                            <div className="bg-hiro-secondaryDark/60 p-2.5 rounded-full border border-white/5">
+                                                <i className="ph-bold ph-fingerprint text-hiro-primary text-xl"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -494,14 +493,14 @@
                                     
                                     {/* Imagem */}
                                     <div className="w-full lg:w-5/12 reveal-left">
-                                        <div className="relative rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] group bg-hiro-blue">
+                                        <div className="relative rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(29,60,89,0.15)] group bg-hiro-secondary">
                                             <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80" 
                                                  alt="André Bento" 
                                                  className="w-full h-[500px] md:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-hiro-navy via-hiro-navy/40 to-transparent"></div>
+                                            <div className="absolute inset-0 bg-gradient-to-t from-hiro-secondaryDark via-hiro-secondaryDark/40 to-transparent"></div>
                                             <div className="absolute bottom-8 left-8 text-white">
                                                 <p className="font-black text-3xl md:text-4xl mb-1">André Bento</p>
-                                                <p className="text-xs md:text-sm text-hiro-green font-bold tracking-widest uppercase">Fundador HIRO & Ex-VP Oracle</p>
+                                                <p className="text-xs md:text-sm text-hiro-primary font-bold tracking-widest uppercase">Fundador HIRO & Ex-VP Oracle</p>
                                             </div>
                                         </div>
                                     </div>
@@ -510,24 +509,24 @@
                                     <div className="w-full lg:w-7/12 reveal-right delay-200">
                                         <div className="flex flex-wrap gap-3 mb-6">
                                             <span className="bg-gray-100 text-gray-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Missão Crítica</span>
-                                            <span className="bg-hiro-green/10 text-hiro-green text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Especialista IA</span>
+                                            <span className="bg-hiro-primary/10 text-hiro-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Especialista IA</span>
                                         </div>
                                         
-                                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-hiro-blue leading-tight mb-8 text-balance tracking-tight">
-                                            A arquitetura da HIRO é assinada por quem lidera a tecnologia de <span className="text-hiro-green">missão crítica</span> no Brasil.
+                                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-hiro-secondary leading-tight mb-8 text-balance tracking-tight">
+                                            A arquitetura da HIRO é assinada por quem lidera a tecnologia de <span className="text-hiro-primary">missão crítica</span> no Brasil.
                                         </h2>
                                         
                                         <div className="text-gray-600 text-base md:text-lg leading-relaxed space-y-6 font-medium">
                                             <p>
-                                                Como <strong className="text-hiro-blue">Ex-Vice-Presidente da Oracle</strong>, André Bento esteve à frente da transformação digital de governos e grandes corporações, orquestrando projetos de altíssima complexidade ao lado de gigantes como <strong className="text-hiro-blue">NVIDIA, Intel e IBM</strong>.
+                                                Como <strong className="text-hiro-secondary">Ex-Vice-Presidente da Oracle</strong>, André Bento esteve à frente da transformação digital de governos e grandes corporações, orquestrando projetos de altíssima complexidade ao lado de gigantes como <strong className="text-hiro-secondary">NVIDIA, Intel e IBM</strong>.
                                             </p>
                                             <p>
-                                                Com um histórico que vai desde a prevenção de falhas sistêmicas em multinacionais como a <strong className="text-hiro-blue">Caterpillar</strong> até painéis de alta performance integrados à <strong className="text-hiro-blue">Red Bull Racing</strong>, André consolidou sua autoridade inquestionável em governança, IA e segurança de dados.
+                                                Com um histórico que vai desde a prevenção de falhas sistêmicas em multinacionais como a <strong className="text-hiro-secondary">Caterpillar</strong> até painéis de alta performance integrados à <strong className="text-hiro-secondary">Red Bull Racing</strong>, André consolidou sua autoridade inquestionável em governança, IA e segurança de dados.
                                             </p>
                                         </div>
 
-                                        <div className="mt-8 border-l-4 border-hiro-green pl-6 py-2">
-                                            <p className="text-hiro-blue font-bold text-lg md:text-xl leading-relaxed text-pretty">
+                                        <div className="mt-8 border-l-4 border-hiro-primary pl-6 py-2">
+                                            <p className="text-hiro-secondary font-bold text-lg md:text-xl leading-relaxed text-pretty">
                                                 Hoje, ele aplica essa mesma engenharia de precisão – antes exclusiva de big techs – para construir o motor forense que blinda o seu RH contra passivos trabalhistas.
                                             </p>
                                         </div>
@@ -606,13 +605,13 @@
                         </section>
 
                         {/* --- 3. O RISCO NR-1 (DOR) --- */}
-                        <section id="problema" className="py-24 md:py-32 relative overflow-hidden bg-hiro-navy">
+                        <section id="problema" className="py-24 md:py-32 relative overflow-hidden bg-hiro-secondaryDark">
                             <div className="absolute inset-0 w-full h-[140%] -top-[20%] z-0 parallax-wrapper" data-speed="0.2">
                                 <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1920&auto=format&fit=crop" 
                                      alt="Fundo Jurídico" 
-                                     className="w-full h-full object-cover animate-slow-zoom opacity-10 grayscale mix-blend-luminosity" />
+                                     className="w-full h-full object-cover animate-slow-zoom opacity-15 grayscale mix-blend-luminosity" />
                             </div>
-                            <div className="absolute inset-0 bg-gradient-to-b from-hiro-navy/95 via-hiro-navy/80 to-hiro-navy/95 z-0"></div>
+                            <div className="absolute inset-0 bg-gradient-to-b from-hiro-secondaryDark/95 via-hiro-secondaryDark/80 to-hiro-secondaryDark/95 z-0"></div>
 
                             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-20 text-center">
                                 <div className="inline-flex items-center justify-center p-4 bg-red-500/10 border border-red-500/20 rounded-full mb-8 reveal">
@@ -643,7 +642,7 @@
                                                 <i className="ph-bold ph-x text-2xl"></i>
                                             </div>
                                             <h3 className="text-2xl font-black text-white mb-4 uppercase tracking-tight">{item.title}</h3>
-                                            <p className="text-gray-300 leading-relaxed font-medium">{item.desc}</p>
+                                            <p className="text-gray-400 leading-relaxed font-medium">{item.desc}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -651,19 +650,19 @@
                         </section>
 
                         {/* --- 4. DIFERENCIAIS (Com x Sem HIRO) --- */}
-                        <section id="diferenciais" className="py-24 md:py-32 bg-hiro-blue relative overflow-hidden border-t border-white/5">
+                        <section id="diferenciais" className="py-24 md:py-32 bg-hiro-secondary relative overflow-hidden border-t border-white/5">
                             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
                                 <div className="text-center mb-16 lg:mb-24 reveal">
                                     <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white drop-shadow-md leading-tight text-balance mx-auto">
                                         O problema não é cumprir a norma. <br/>
-                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-hiro-green to-teal-200">É provar que você cumpre.</span>
+                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-hiro-primary to-[#A3D3FF]">É provar que você cumpre.</span>
                                     </h2>
                                 </div>
 
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
                                     
                                     {/* Sem Governança */}
-                                    <div className="bg-hiro-navy/80 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 hover:bg-hiro-navy hover:border-red-500/40 transition-all duration-500 reveal-left group shadow-xl">
+                                    <div className="bg-hiro-secondaryDark/80 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 hover:bg-hiro-secondaryDark hover:border-red-500/40 transition-all duration-500 reveal-left group shadow-xl">
                                         <div className="flex items-center gap-5 mb-10">
                                             <div className="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center border border-red-500/20 group-hover:scale-110 transition-transform">
                                                 <i className="ph-bold ph-file-x text-red-500 text-3xl"></i>
@@ -688,13 +687,13 @@
                                     </div>
 
                                     {/* Com Governança */}
-                                    <div className="bg-gradient-to-br from-hiro-navy to-[#08111e] backdrop-blur-2xl border-2 border-hiro-green/50 rounded-[2.5rem] p-8 md:p-12 transform lg:-translate-y-6 shadow-[0_20px_40px_rgba(0,209,142,0.1)] hover:shadow-[0_30px_60px_rgba(0,209,142,0.2)] hover:border-hiro-green transition-all duration-500 reveal-right group relative">
-                                        <div className="absolute -top-4 right-8 bg-hiro-green text-hiro-navy text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg">
+                                    <div className="bg-gradient-to-br from-hiro-secondaryDark to-[#0F2030] backdrop-blur-2xl border-2 border-hiro-primary/50 rounded-[2.5rem] p-8 md:p-12 transform lg:-translate-y-6 shadow-[0_20px_40px_rgba(80,168,251,0.1)] hover:shadow-[0_30px_60px_rgba(80,168,251,0.2)] hover:border-hiro-primary transition-all duration-500 reveal-right group relative">
+                                        <div className="absolute -top-4 right-8 bg-hiro-primary text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg">
                                             Padrão Ouro
                                         </div>
                                         <div className="flex items-center gap-5 mb-10 mt-2 sm:mt-0">
-                                            <div className="w-16 h-16 rounded-2xl bg-hiro-green flex items-center justify-center shadow-[0_0_20px_rgba(0,209,142,0.4)] group-hover:scale-110 transition-transform">
-                                                <i className="ph-bold ph-shield-check text-hiro-navy text-3xl"></i>
+                                            <div className="w-16 h-16 rounded-2xl bg-hiro-primary flex items-center justify-center shadow-[0_0_20px_rgba(80,168,251,0.4)] group-hover:scale-110 transition-transform">
+                                                <i className="ph-bold ph-shield-check text-white text-3xl"></i>
                                             </div>
                                             <h3 className="text-3xl font-black text-white uppercase tracking-tight">Com o HIRO</h3>
                                         </div>
@@ -706,8 +705,8 @@
                                                 'Pronto para fiscalização amanhã'
                                             ].map((text, i) => (
                                                 <li key={i} className="flex items-start gap-4 group/item">
-                                                    <div className="w-8 h-8 rounded-full bg-hiro-green/20 flex items-center justify-center shrink-0">
-                                                        <i className="ph-bold ph-check text-hiro-green text-lg"></i>
+                                                    <div className="w-8 h-8 rounded-full bg-hiro-primary/20 flex items-center justify-center shrink-0">
+                                                        <i className="ph-bold ph-check text-hiro-primary text-lg"></i>
                                                     </div>
                                                     <span className="text-white font-bold text-lg mt-0.5">{text}</span>
                                                 </li>
@@ -720,25 +719,25 @@
                         </section>
 
                         {/* --- 5. A ÚNICA PROVA IRREFUTÁVEL --- */}
-                        <section id="prova" className="py-24 md:py-32 bg-hiro-navy relative overflow-hidden border-t border-white/5">
+                        <section id="prova" className="py-24 md:py-32 bg-hiro-secondaryDark relative overflow-hidden border-t border-white/5">
                             <div className="absolute inset-0 w-full h-[140%] -top-[20%] parallax-wrapper" data-speed="0.15">
                                 <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1920&auto=format&fit=crop" 
                                      alt="Tecnologia e Dados" 
                                      className="w-full h-full object-cover animate-slow-zoom opacity-[0.08] mix-blend-screen" />
                             </div>
-                            <div className="absolute inset-0 bg-gradient-to-b from-[#08111e]/40 via-hiro-navy/60 to-hiro-navy/90 z-0"></div>
+                            <div className="absolute inset-0 bg-gradient-to-b from-hiro-secondaryDark/40 via-hiro-secondary/60 to-hiro-secondary/90 z-0"></div>
                             
                             <div className="max-w-5xl mx-auto px-6 relative z-20 text-center reveal">
                                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-white mb-6 leading-tight text-balance mx-auto">
                                     A única prova irrefutável <br className="hidden md:block"/> do mercado brasileiro.
                                 </h2>
                                 <p className="text-base md:text-lg text-gray-300 mb-14 font-medium max-w-3xl mx-auto leading-relaxed text-pretty">
-                                    Enquanto as ferramentas genéricas não resistem a uma perícia básica, nós entregamos o <strong className="text-hiro-green font-bold">Padrão Ouro</strong>. Selamos seus relatórios com o Relógio Atômico (RFC 3161). O tempo da prova é real, imutável e irrefutável.
+                                    Enquanto as ferramentas genéricas não resistem a uma perícia básica, nós entregamos o <strong className="text-hiro-primary font-bold">Padrão Ouro</strong>. Selamos seus relatórios com o Relógio Atômico (RFC 3161). O tempo da prova é real, imutável e irrefutável.
                                 </p>
 
-                                <div className="glass-card p-6 md:p-8 rounded-2xl inline-flex flex-col text-left transform hover:scale-105 transition-transform duration-500 cursor-crosshair shadow-2xl border-white/10 w-full sm:w-auto mx-auto bg-hiro-blue/80 backdrop-blur-xl">
+                                <div className="glass-card p-6 md:p-8 rounded-2xl inline-flex flex-col text-left transform hover:scale-105 transition-transform duration-500 cursor-crosshair shadow-2xl border-white/10 w-full sm:w-auto mx-auto bg-hiro-secondary/80 backdrop-blur-xl">
                                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-5 border-b border-white/10 pb-5">
-                                        <div className="w-12 h-12 rounded-xl bg-hiro-green/10 text-hiro-green flex items-center justify-center shrink-0">
+                                        <div className="w-12 h-12 rounded-xl bg-hiro-primary/10 text-hiro-primary flex items-center justify-center shrink-0">
                                             <i className="ph-bold ph-fingerprint text-3xl"></i>
                                         </div>
                                         <div className="overflow-hidden">
@@ -747,7 +746,7 @@
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <i className="ph-bold ph-check-circle text-hiro-green text-xl"></i>
+                                        <i className="ph-bold ph-check-circle text-hiro-primary text-xl"></i>
                                         <p className="text-sm md:text-base font-bold text-white tracking-wide">Carimbo de Tempo ICP-Brasil Anexado</p>
                                     </div>
                                 </div>
@@ -755,14 +754,14 @@
                         </section>
 
                         {/* --- 6. A SOLUÇÃO (FUNCIONALIDADES / CARROSSEL) --- */}
-                        <section id="estrutura" className="py-24 md:py-32 bg-hiro-blue relative overflow-hidden border-t border-white/5">
+                        <section id="estrutura" className="py-24 md:py-32 bg-[#0F2030] relative overflow-hidden border-t border-white/5">
                             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
                                 <div className="text-center mb-16 lg:mb-24 reveal">
                                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white mb-4 leading-tight text-balance mx-auto">Ver Funcionalidades</h2>
-                                    <p className="text-lg md:text-xl text-hiro-green font-bold tracking-widest uppercase">HIRO: O SUPER PODER do novo RH de alta perfomance</p>
+                                    <p className="text-lg md:text-xl text-hiro-primary font-bold tracking-widest uppercase">HIRO: O SUPER PODER do novo RH de alta perfomance</p>
                                 </div>
 
-                                <div className="flex flex-col lg:flex-row gap-12 items-center bg-hiro-navy p-6 md:p-10 rounded-[2.5rem] border border-white/5 shadow-2xl reveal delay-100">
+                                <div className="flex flex-col lg:flex-row gap-12 items-center bg-hiro-secondaryDark p-6 md:p-10 rounded-[2.5rem] border border-white/5 shadow-2xl reveal delay-100">
                                     
                                     <div className="w-full lg:w-1/2 flex flex-col gap-4">
                                         {heroFeatures.map((feature, index) => {
@@ -771,10 +770,10 @@
                                                 <div 
                                                     key={feature.id} 
                                                     onClick={() => setActiveFeature(index)}
-                                                    className={`cursor-pointer transition-all duration-300 p-6 md:p-8 border-l-4 rounded-r-2xl ${isActive ? 'bg-hiro-blue/40 border-hiro-green shadow-md' : 'bg-transparent border-transparent hover:bg-white/5'}`}
+                                                    className={`cursor-pointer transition-all duration-300 p-6 md:p-8 border-l-4 rounded-r-2xl ${isActive ? 'bg-hiro-secondary/40 border-hiro-primary shadow-md' : 'bg-transparent border-transparent hover:bg-white/5'}`}
                                                 >
                                                     <div className="flex items-center gap-4 mb-3">
-                                                        <div className={`p-3 rounded-xl transition-colors ${isActive ? 'bg-hiro-green/20 text-hiro-green' : 'bg-gray-800 text-gray-400'}`}>
+                                                        <div className={`p-3 rounded-xl transition-colors ${isActive ? 'bg-hiro-primary/20 text-hiro-primary' : 'bg-gray-800 text-gray-400'}`}>
                                                             <i className={`ph-bold ${feature.icon} text-2xl`}></i>
                                                         </div>
                                                         <h3 className={`text-xl md:text-2xl font-black uppercase tracking-tight transition-colors ${isActive ? 'text-white' : 'text-gray-400'}`}>{feature.title}</h3>
@@ -788,14 +787,14 @@
                                     </div>
 
                                     <div className="w-full lg:w-1/2">
-                                        <div className="relative w-full h-[400px] md:h-[500px] rounded-[2rem] overflow-hidden shadow-2xl bg-hiro-blue border border-white/10">
+                                        <div className="relative w-full h-[400px] md:h-[500px] rounded-[2rem] overflow-hidden shadow-2xl bg-hiro-secondary border border-white/10">
                                             <img 
                                                 src={heroFeatures[activeFeature].img} 
                                                 alt={heroFeatures[activeFeature].title}
                                                 className="absolute inset-0 w-full h-full object-cover opacity-60 animate-[reveal_0.5s_ease-in-out] grayscale mix-blend-luminosity"
                                                 key={heroFeatures[activeFeature].id} 
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-hiro-navy via-transparent to-transparent opacity-90"></div>
+                                            <div className="absolute inset-0 bg-gradient-to-t from-hiro-secondaryDark via-transparent to-transparent opacity-90"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -803,7 +802,7 @@
                         </section>
 
                         {/* --- 7. ROI E IMPACTO --- */}
-                        <section id="roi" className="py-24 md:py-32 bg-hiro-navy relative overflow-hidden border-t border-white/5">
+                        <section id="roi" className="py-24 md:py-32 bg-hiro-secondaryDark relative overflow-hidden border-t border-white/5">
                             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
                                 <div className="text-center mb-16 lg:mb-24 reveal">
                                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white mb-6 text-balance mx-auto">Segurança que gera valor real de mercado.</h2>
@@ -816,9 +815,9 @@
                                         { metric: "Retenção", desc: "Queda drástica no turnover ao mapear falhas antes da saída do talento.", icon: "ph-users" },
                                         { metric: "Estratégia", desc: "O RH deixa de ser setor de custo operacional e vira braço direito do conselho.", icon: "ph-strategy" }
                                     ].map((item, i) => (
-                                        <div key={i} className={`glass-card p-10 md:p-12 rounded-[2.5rem] text-center hover:border-hiro-green/50 transition-all duration-500 group reveal shadow-xl hover:-translate-y-2 delay-${(i%3)*100}`}>
-                                            <div className="w-20 h-20 rounded-2xl bg-hiro-navy border border-gray-700 mx-auto flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-hiro-green group-hover:border-hiro-green transition-all duration-300 shadow-inner">
-                                                <i className={`ph-bold ${item.icon} text-4xl text-hiro-green group-hover:text-hiro-navy transition-colors`}></i>
+                                        <div key={i} className={`glass-card p-10 md:p-12 rounded-[2.5rem] text-center hover:border-hiro-primary/50 transition-all duration-500 group reveal shadow-xl hover:-translate-y-2 delay-${(i%3)*100}`}>
+                                            <div className="w-20 h-20 rounded-2xl bg-[#0F2030] border border-gray-700 mx-auto flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-hiro-primary group-hover:border-hiro-primary transition-all duration-300 shadow-inner">
+                                                <i className={`ph-bold ${item.icon} text-4xl text-hiro-primary group-hover:text-white transition-colors`}></i>
                                             </div>
                                             <h3 className="text-4xl lg:text-5xl font-black text-white uppercase tracking-tighter mb-4">{item.metric}</h3>
                                             <p className="text-gray-300 font-medium leading-relaxed text-sm md:text-base">{item.desc}</p>
@@ -829,21 +828,21 @@
                         </section>
 
                         {/* --- 8. FAQ --- */}
-                        <section id="faq" className="py-20 md:py-28 bg-hiro-blue relative overflow-hidden border-t border-white/5">
+                        <section id="faq" className="py-20 md:py-28 bg-hiro-secondary relative overflow-hidden border-t border-white/5">
                             <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-20 reveal">
                                 <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-white mb-12 text-center text-balance">Dúvidas sobre a Conformidade NR-1?</h2>
                                 <div className="space-y-4">
                                     {faqs.map((faq, i) => (
                                         <div 
                                             key={i} 
-                                            className={`glass-card rounded-2xl cursor-pointer transition-all duration-300 overflow-hidden border ${openFAQ === i ? 'border-hiro-green shadow-[0_0_20px_rgba(0,209,142,0.1)]' : 'border-white/10 hover:border-white/30'}`}
+                                            className={`glass-card rounded-2xl cursor-pointer transition-all duration-300 overflow-hidden border ${openFAQ === i ? 'border-hiro-primary shadow-[0_0_20px_rgba(80,168,251,0.1)]' : 'border-white/10 hover:border-white/30'}`}
                                             onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
                                         >
                                             <div className="flex justify-between items-center p-6 sm:p-8 font-bold text-lg text-white">
                                                 <span className="pr-4">{faq.q}</span>
-                                                <i className={`ph-bold ph-caret-down text-xl transition-transform duration-300 shrink-0 ${openFAQ === i ? 'rotate-180 text-hiro-green' : 'text-gray-400'}`}></i>
+                                                <i className={`ph-bold ph-caret-down text-xl transition-transform duration-300 shrink-0 ${openFAQ === i ? 'rotate-180 text-hiro-primary' : 'text-gray-400'}`}></i>
                                             </div>
-                                            <div className={`overflow-hidden transition-all duration-300 bg-hiro-navy/50 ${openFAQ === i ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                            <div className={`overflow-hidden transition-all duration-300 bg-hiro-secondaryDark/50 ${openFAQ === i ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
                                                 <div className="p-6 sm:p-8 pt-0 text-gray-300 font-medium leading-relaxed border-t border-white/5 mt-2 text-sm md:text-base">
                                                     {faq.a}
                                                 </div>
@@ -855,68 +854,68 @@
                         </section>
 
                         {/* --- 9. CTA FINAL / FORMULARIO --- */}
-                        <section id="contato" className="py-24 md:py-32 bg-hiro-navy relative overflow-hidden border-t border-white/5">
+                        <section id="contato" className="py-24 md:py-32 bg-[#122639] relative overflow-hidden border-t border-white/5">
                             <div className="absolute top-0 left-[-50%] w-[200%] h-full bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 translate-x-full animate-[shine_5s_infinite] pointer-events-none"></div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-hiro-navy to-transparent z-0 pointer-events-none"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-hiro-secondaryDark to-transparent z-0 pointer-events-none"></div>
                             
                             <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-20 flex flex-col lg:flex-row gap-16 items-center">
                                 
                                 <div className="w-full lg:w-1/2 reveal-left">
                                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight uppercase tracking-tighter text-balance">
                                         Dar o próximo passo leva <br/>
-                                        <span className="text-hiro-green">menos de um minuto</span>
+                                        <span className="text-hiro-primary">menos de um minuto</span>
                                     </h2>
                                     
                                     <div className="mt-12 space-y-10">
                                         <div className="flex gap-6">
-                                            <div className="w-14 h-14 rounded-2xl border-2 border-hiro-green text-hiro-green flex items-center justify-center font-black text-2xl shrink-0 bg-hiro-green/10">1</div>
+                                            <div className="w-14 h-14 rounded-2xl border-2 border-hiro-primary text-hiro-primary flex items-center justify-center font-black text-2xl shrink-0 bg-hiro-primary/10">1</div>
                                             <div>
                                                 <h3 className="text-2xl font-black text-white mb-3 uppercase tracking-wide">Preencha o formulário</h3>
-                                                <p className="text-gray-400 leading-relaxed font-medium text-lg text-pretty">Envie suas informações corporativas. Todos os seus dados estarão seguros e protegidos pela nossa criptografia.</p>
+                                                <p className="text-gray-300 leading-relaxed font-medium text-lg text-pretty">Envie suas informações corporativas. Todos os seus dados estarão seguros e protegidos pela nossa criptografia.</p>
                                             </div>
                                         </div>
                                         <div className="flex gap-6">
-                                            <div className="w-14 h-14 rounded-2xl border-2 border-hiro-green text-hiro-green flex items-center justify-center font-black text-2xl shrink-0 bg-hiro-green/10">2</div>
+                                            <div className="w-14 h-14 rounded-2xl border-2 border-hiro-primary text-hiro-primary flex items-center justify-center font-black text-2xl shrink-0 bg-hiro-primary/10">2</div>
                                             <div>
                                                 <h3 className="text-2xl font-black text-white mb-3 uppercase tracking-wide">Receba uma ligação</h3>
-                                                <p className="text-gray-400 leading-relaxed font-medium text-lg text-pretty">Um dos nossos diretores fará uma ligação para entender seu cenário e agendar uma demonstração do copiloto.</p>
+                                                <p className="text-gray-300 leading-relaxed font-medium text-lg text-pretty">Um dos nossos diretores fará uma ligação para entender seu cenário e agendar uma demonstração do copiloto.</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="w-full lg:w-1/2 reveal-right delay-200 max-w-md mx-auto lg:max-w-none">
-                                    <div className="glass-card p-8 md:p-12 rounded-[2.5rem] shadow-2xl border-t-2 border-white/10 hover:border-hiro-green/40 transition-colors duration-500 relative group overflow-hidden bg-hiro-blue/30">
-                                        <div className="absolute -inset-2 bg-gradient-to-r from-transparent via-hiro-green/10 to-transparent rotate-45 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 animate-[shine_4s_infinite] pointer-events-none"></div>
+                                    <div className="glass-card p-8 md:p-12 rounded-[2.5rem] shadow-2xl border-t-2 border-white/10 hover:border-hiro-primary/40 transition-colors duration-500 relative group overflow-hidden bg-hiro-secondary/30">
+                                        <div className="absolute -inset-2 bg-gradient-to-r from-transparent via-hiro-primary/10 to-transparent rotate-45 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 animate-[shine_4s_infinite] pointer-events-none"></div>
 
                                         <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
                                             <div>
                                                 <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">Nome Completo</label>
-                                                <input type="text" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-cardBlue/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
+                                                <input type="text" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-primary transition-all shadow-inner text-sm" />
                                             </div>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">E-mail Corporativo</label>
-                                                    <input type="email" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-cardBlue/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
+                                                    <input type="email" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-primary transition-all shadow-inner text-sm" />
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">WhatsApp</label>
-                                                    <input type="tel" required value={formData.whatsapp} onChange={e => setFormData({...formData, whatsapp: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-cardBlue/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
+                                                    <input type="tel" required value={formData.whatsapp} onChange={e => setFormData({...formData, whatsapp: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-primary transition-all shadow-inner text-sm" />
                                                 </div>
                                             </div>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">Cargo</label>
-                                                    <input type="text" required value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-cardBlue/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
+                                                    <input type="text" required value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-primary transition-all shadow-inner text-sm" />
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">Empresa</label>
-                                                    <input type="text" required value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-cardBlue/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
+                                                    <input type="text" required value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-primary transition-all shadow-inner text-sm" />
                                                 </div>
                                             </div>
                                             <div>
                                                 <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">Número de funcionários</label>
-                                                <select required value={formData.size} onChange={e => setFormData({...formData, size: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-cardBlue/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm cursor-pointer appearance-none">
+                                                <select required value={formData.size} onChange={e => setFormData({...formData, size: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-primary transition-all shadow-inner text-sm cursor-pointer appearance-none">
                                                     <option value="" disabled>Selecione o tamanho da empresa</option>
                                                     <option value="1-49">1 a 49 funcionários</option>
                                                     <option value="50-99">50 a 99 funcionários</option>
@@ -925,7 +924,7 @@
                                                 </select>
                                             </div>
                                             <div className="pt-4">
-                                                <button type="submit" className="btn-shine w-full bg-hiro-green text-hiro-navy hover:bg-hiro-greenHover font-black uppercase tracking-widest py-5 rounded-xl text-lg transition-all transform hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,209,142,0.4)] flex justify-center items-center gap-3">
+                                                <button type="submit" className="btn-shine w-full bg-hiro-green text-hiro-secondaryDark hover:bg-hiro-greenHover font-black uppercase tracking-widest py-5 rounded-xl text-lg transition-all transform hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,209,142,0.4)] flex justify-center items-center gap-3">
                                                     Solicitar contato
                                                     <i className="ph-bold ph-paper-plane-right text-2xl"></i>
                                                 </button>
@@ -937,7 +936,7 @@
                         </section>
 
                         {/* FOOTER */}
-                        <footer className="bg-hiro-navy text-gray-500 py-12 md:py-16 text-center text-sm border-t border-white/5">
+                        <footer className="bg-[#0b1622] text-gray-500 py-12 md:py-16 text-center text-sm border-t border-white/5">
                             <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
                                 <a href="#inicio" onClick={(e) => scrollToSection(e, 'inicio')} className="mb-10 transition-transform duration-500 inline-block hover:scale-105">
                                     <img 
@@ -955,17 +954,17 @@
 
                     {/* --- MODAL DE VÍDEO --- */}
                     {isVideoModalOpen && (
-                        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-hiro-navy/95 backdrop-blur-sm p-4">
+                        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-hiro-secondaryDark/95 backdrop-blur-sm p-4">
                             <div className="bg-black w-full max-w-4xl aspect-video relative rounded-2xl overflow-hidden shadow-2xl border border-gray-700 animate-[reveal_0.3s_ease-out] active">
                                 <button 
                                     onClick={() => setIsVideoModalOpen(false)}
-                                    className="absolute top-6 right-6 z-20 text-white bg-white/10 hover:bg-hiro-green hover:text-hiro-navy w-12 h-12 flex items-center justify-center rounded-full transition-colors backdrop-blur-md"
+                                    className="absolute top-6 right-6 z-20 text-white bg-white/10 hover:bg-hiro-primary hover:text-white w-12 h-12 flex items-center justify-center rounded-full transition-colors backdrop-blur-md"
                                 >
                                     <i className="ph-bold ph-x text-2xl"></i>
                                 </button>
                                 
-                                <div className="absolute inset-0 flex flex-col items-center justify-center bg-hiro-navy text-gray-400">
-                                    <i className="ph-fill ph-play-circle text-6xl text-hiro-green/50 mb-4 animate-pulse"></i>
+                                <div className="absolute inset-0 flex flex-col items-center justify-center bg-hiro-secondaryDark text-gray-400">
+                                    <i className="ph-fill ph-play-circle text-6xl text-hiro-primary/50 mb-4 animate-pulse"></i>
                                     <p className="font-bold uppercase tracking-widest text-sm">Vídeo Demonstrativo HIRO rodando...</p>
                                 </div>
                             </div>
