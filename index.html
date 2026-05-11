@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIRO - Governança e Conformidade NR-1</title>
+    <meta name="description" content="Gere provas irrefutáveis de diligência com o único sistema com validade forense do Brasil.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://via.placeholder.com/32/00D18E/1E3A5F?text=H" type="image/png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        hiro: {
+                            green: '#00D18E',
+                            greenHover: '#00b37a',
+                            blue: '#1E3A5F',      /* Primary Blue da Identidade */
+                            navy: '#0A1628',      /* Navy da Identidade */
+                            cardBlue: '#152C48',  /* Tom intermediário para cards */
+                            gray: '#8D8D8D',
+                            light: '#F5F5F5',
+                            appbg: '#f8fafc'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'blob': 'blob 12s infinite',
+                        'shine': 'shine 5s infinite',
+                        'slow-zoom': 'slowZoom 30s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        shine: {
+                            '0%': { left: '-100%' },
+                            '20%': { left: '100%' },
+                            '100%': { left: '100%' },
+                        },
+                        slowZoom: {
+                            '0%': { transform: 'scale(1.0)' },
+                            '100%': { transform: 'scale(1.12)' },
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        /* Base e Scrollbar */
+        html { scroll-behavior: smooth; }
+        body { 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale; 
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0A1628; }
+        ::-webkit-scrollbar-thumb { background: #00D18E; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00b37a; }
+
+        /* Typography utilities */
+        .text-balance { text-wrap: balance; }
+        .text-pretty { text-wrap: pretty; }
+
+        /* Glassmorphism Refinado - Ajustado para o Azul da HIRO */
+        .glass-card {
+            background: rgba(30, 58, 95, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mockup dos celulares Responsivos */
+        .phone-mockup {
+            box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.5);
+            border: 6px solid #1E3A5F;
+            border-radius: 2.5rem;
+            overflow: hidden;
+            background-color: white;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Efeito de brilho contínuo nos botões */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(35deg);
+            animation: shine 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            z-index: -1;
+        }
+
+        /* Parallax Wrapper otimizado para hardware */
+        .parallax-wrapper {
+            will-change: transform;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+        }
+
+        /* Animações Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active, .reveal-left.active, .reveal-right.active {
+            opacity: 1;
+            transform: translate(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Custom Inputs */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active,
+        select:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 30px #152C48 inset !important;
+            -webkit-text-fill-color: white !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+    </style>
+    
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-hiro-navy text-white selection:bg-hiro-green selection:text-hiro-navy">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const heroFeatures = [
+            {
+                id: 0,
+                title: "IA como Copiloto",
+                desc: "Automatiza pesquisas psicossociais e traduz o sentimento da equipe em dados claros. O RH abandona o trabalho braçal de planilhas e assume seu papel definitivo: o de protagonista na performance da empresa.",
+                icon: "ph-users",
+                img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 1,
+                title: "Relógio atômico",
+                desc: "O judiciário brasileiro sofre com provas subjetivas. A HIRO fornece um verdadeiro escudo para seus advogados: cada relatório é selado com o Relógio Atômico (RFC 3161) e assinatura ICP-Brasil, provando diligência de forma irrefutável.",
+                icon: "ph-fingerprint",
+                img: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 2,
+                title: "Solução especialista",
+                desc: "Muitas soluções no mercado são sistemas genéricos que fizeram um 'puxadinho' para vender NR-1. A HIRO nasceu exclusivamente para isso: entregamos o ciclo completo, do mapeamento preventivo à gestão da intervenção.",
+                icon: "ph-layers",
+                img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 3,
+                title: "Rastreabilidade & Imutabilidade",
+                desc: "Dados de saúde mental são os mais sensíveis de um indivíduo. Garantimos a rastreabilidade e imutabilidade dos dados com criptografia SHA-256, protegendo sua empresa contra vazamentos e garantindo conformidade absoluta.",
+                icon: "ph-lock-key",
+                img: "https://images.unsplash.com/photo-1510511459019-5efa3cd240d4?auto=format&fit=crop&w=800&q=80"
+            }
+        ];
+
+        const faqs = [
+            {
+                q: "Qual a punição para quem não se adequar até 26/05/2026?",
+                a: "Multas pesadas aplicadas pelo Ministério do Trabalho, interdição de atividades e responsabilização solidária da diretoria (risco fiduciário e patrimonial pessoal) em casos de negligência comprovada com a saúde psicossocial."
+            },
+            {
+                q: "Como a HIRO prova que os dados não foram manipulados?",
+                a: "Utilizamos arquitetura forense de dados. Cada registro gera um hash SHA-256 e é selado com o Relógio Atômico (RFC 3161) da ICP-Brasil. Isso garante matematicamente perante um juiz que o documento existia naquele exato segundo e nunca foi alterado."
+            },
+            {
+                q: "O sistema substitui o PGR ou PCMSO?",
+                a: "Não. A HIRO atua como um Copiloto Integrado focado especificamente na vertical de riscos psicossociais e de governança comportamental, gerando insumos e um composto probatório que alimentam e blindam as entregas do seu PGR e PCMSO."
+            }
+        ];
+
+        function HiroApp() {
+            const [isScrolled, setIsScrolled] = useState(false);
+            const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+            const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+            const [activeFeature, setActiveFeature] = useState(0);
+            const [openFAQ, setOpenFAQ] = useState(null);
+            const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '', role: '', company: '', size: '' });
+
+            useEffect(() => {
+                // Header Scroll Effect
+                const handleScroll = () => setIsScrolled(window.scrollY > 40);
+                window.addEventListener('scroll', handleScroll, { passive: true });
+
+                // Reveal Animations
+                const observerOptions = {
+                    root: null,
+                    threshold: 0.1,
+                    rootMargin: "0px 0px -50px 0px"
+                };
+
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+
+                setTimeout(() => {
+                    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+                        revealObserver.observe(el);
+                    });
+                }, 100);
+
+                // Parallax Otimizado
+                let ticking = false;
+                const handleParallax = () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            const wrappers = document.querySelectorAll('.parallax-wrapper');
+                            wrappers.forEach(wrapper => {
+                                const parent = wrapper.parentElement;
+                                if (!parent) return;
+                                
+                                const rect = parent.getBoundingClientRect();
+                                const windowHeight = window.innerHeight;
+                                
+                                if (rect.top <= windowHeight && rect.bottom >= 0) {
+                                    const offset = (windowHeight / 2) - (rect.top + rect.height / 2);
+                                    const speed = parseFloat(wrapper.getAttribute('data-speed')) || 0.15;
+                                    const yPos = offset * speed;
+                                    
+                                    wrapper.style.transform = `translate3d(0, ${yPos}px, 0)`;
+                                }
+                            });
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                };
+
+                window.addEventListener('scroll', handleParallax, { passive: true });
+                window.addEventListener('resize', handleParallax, { passive: true });
+                setTimeout(handleParallax, 50);
+
+                return () => {
+                    window.removeEventListener('scroll', handleScroll);
+                    window.removeEventListener('scroll', handleParallax);
+                    window.removeEventListener('resize', handleParallax);
+                    revealObserver.disconnect();
+                };
+            }, []);
+
+            const scrollToSection = (e, id) => {
+                e.preventDefault();
+                setIsMobileMenuOpen(false);
+                const element = document.getElementById(id);
+                if (element) {
+                    const yOffset = -80;
+                    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                alert("Obrigado pelo interesse! Um diretor entrará em contato em breve.");
+                setFormData({ name: '', email: '', whatsapp: '', role: '', company: '', size: '' });
+            };
+
+            return (
+                <div className="w-full h-full font-sans">
+                    
+                    {/* --- HEADER FLUTUANTE --- */}
+                    <header className={`fixed z-50 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-7xl rounded-full transition-all duration-500 flex justify-between items-center px-4 py-3 sm:px-6 sm:py-4 ${
+                        isScrolled 
+                        ? 'top-2 sm:top-4 bg-white/95 backdrop-blur-xl border border-hiro-blue/10 shadow-[0_15px_30px_-10px_rgba(30,58,95,0.15)] text-hiro-navy' 
+                        : 'top-4 sm:top-6 bg-white/5 backdrop-blur-sm border border-white/20 text-white'
+                    }`}>
+                        <a href="#inicio" onClick={(e) => scrollToSection(e, 'inicio')} className="flex items-center transition-transform hover:scale-105">
+                            <img 
+                                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663112691788/BxsOqkAxwEutpZHT.png" 
+                                alt="HIRO Logo" 
+                                className={`h-10 sm:h-12 lg:h-14 w-auto transition-all duration-300 ${isScrolled ? '' : 'brightness-0 invert'}`} 
+                            />
+                        </a>
+
+                        {/* Nav Desktop */}
+                        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+                            {['Autoridade', 'Problema', 'Diferenciais', 'Estrutura', 'Prova'].map((item) => {
+                                const id = item.toLowerCase().replace(/ /g, '-').replace(/ó/g, 'o');
+                                return (
+                                    <a key={item} href={`#${id}`} onClick={(e) => scrollToSection(e, id)} 
+                                       className={`text-[11px] xl:text-xs font-bold uppercase tracking-widest transition-all hover:text-hiro-green hover:-translate-y-0.5 ${isScrolled ? 'text-hiro-navy' : 'text-gray-300 hover:text-white'}`}>
+                                        {item}
+                                    </a>
+                                )
+                            })}
+                        </nav>
+
+                        {/* CTA Desktop */}
+                        <a href="#contato" onClick={(e) => scrollToSection(e, 'contato')} 
+                           className="hidden lg:inline-flex bg-hiro-green hover:bg-hiro-greenHover text-hiro-navy px-5 xl:px-6 py-3 rounded-full font-black uppercase tracking-widest text-[10px] xl:text-[11px] items-center gap-2 transition-all hover:scale-105 shadow-[0_4px_20px_rgba(0,209,142,0.3)]">
+                            Falar com Especialista <i className="ph-bold ph-arrow-right text-base"></i>
+                        </a>
+
+                        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors">
+                            <i className={`ph-bold ${isMobileMenuOpen ? 'ph-x' : 'ph-list'} text-2xl ${isScrolled ? 'text-hiro-navy' : 'text-white'}`}></i>
+                        </button>
+
+                        {/* Menu Mobile */}
+                        <div className={`absolute top-full left-0 w-full mt-3 bg-white/95 backdrop-blur-xl rounded-3xl flex flex-col shadow-2xl border border-gray-100 overflow-hidden transition-all duration-300 origin-top lg:hidden ${
+                            isMobileMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'
+                        }`}>
+                            {['Autoridade', 'Problema', 'Diferenciais', 'Estrutura', 'Prova'].map((item) => {
+                                const id = item.toLowerCase().replace(/ /g, '-').replace(/ó/g, 'o');
+                                return (
+                                    <a key={item} href={`#${id}`} onClick={(e) => scrollToSection(e, id)} 
+                                       className="px-6 py-4 border-b border-gray-100 text-sm font-black uppercase tracking-widest text-hiro-blue hover:text-hiro-green hover:bg-gray-50 transition-colors">
+                                        {item}
+                                    </a>
+                                )
+                            })}
+                        </div>
+                    </header>
+
+                    {/* --- 1. HERO SECTION (CLEAN & MODERN, STICKY PARA EFEITO CORTINA) --- */}
+                    <section id="inicio" className="sticky top-0 z-0 w-full flex items-center min-h-[100svh] pt-32 pb-20 overflow-hidden bg-hiro-blue">
+                        <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                            
+                            {/* Copy Hero */}
+                            <div className="w-full lg:w-1/2 text-center lg:text-left reveal-left">
+                                <div className="inline-flex items-center gap-2 py-1.5 px-3 rounded border border-white/10 bg-hiro-navy/30 text-hiro-green font-bold text-[10px] md:text-xs tracking-widest uppercase mb-8 shadow-sm">
+                                    <div className="w-2 h-2 rounded-full bg-hiro-green"></div>
+                                    SOFTWARE RH NR-1 COMPLIANCE
+                                </div>
+                                
+                                <h1 className="text-[2.75rem] sm:text-5xl lg:text-[4.8rem] font-black tracking-tighter mb-6 leading-[1.05] text-white text-balance text-left mx-auto lg:mx-0">
+                                    Único sistema <br className="hidden sm:block"/>
+                                    de validade <br className="hidden sm:block"/>
+                                    <span className="text-[#C4D2FE]">forense do <br className="hidden sm:block"/> Brasil</span>
+                                </h1>
+                                
+                                <p className="text-lg md:text-xl mb-10 font-medium text-gray-200 max-w-xl mx-auto lg:mx-0 leading-relaxed text-pretty text-left">
+                                    Não apenas monitore a saúde mental. <strong className="text-white font-bold">Gere provas irrefutáveis de diligência</strong> com o selo de relógio atômico.
+                                </p>
+                                
+                                <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-6 w-full">
+                                    <a href="#contato" onClick={(e) => scrollToSection(e, 'contato')} className="bg-hiro-green text-hiro-navy hover:bg-hiro-greenHover font-bold py-4 px-8 rounded text-sm sm:text-base transition-colors flex justify-center items-center w-full sm:w-auto shadow-[0_10px_30px_rgba(0,209,142,0.3)] hover:-translate-y-1 transform duration-300">
+                                        Quero saber mais
+                                    </a>
+                                    <button onClick={() => setIsVideoModalOpen(true)} className="flex items-center justify-center gap-3 text-white font-bold hover:text-hiro-green transition-colors group">
+                                        <div className="w-10 h-10 border-2 border-white group-hover:border-hiro-green rounded-full flex items-center justify-center transition-colors">
+                                            <i className="ph-fill ph-play ml-1 text-sm"></i>
+                                        </div>
+                                        Ver como funciona
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Card Status de Conformidade */}
+                            <div className="w-full lg:w-1/2 relative reveal-right delay-200 max-w-md mx-auto lg:max-w-none">
+                                <div className="bg-hiro-cardBlue w-full rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden relative z-10 flex flex-col border border-white/5">
+                                    {/* Mac OS Header */}
+                                    <div className="h-10 bg-hiro-navy border-b border-white/5 flex items-center px-4 relative">
+                                        <div className="flex gap-2">
+                                            <div className="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
+                                            <div className="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
+                                            <div className="w-3 h-3 rounded-full bg-[#27C93F]"></div>
+                                        </div>
+                                        <div className="absolute left-1/2 transform -translate-x-1/2 bg-[#112238] px-4 py-1 rounded text-[10px] font-medium text-gray-400">
+                                            hiro.app/governance
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="flex-1 p-6 md:p-8 relative">
+                                        <div className="flex justify-between items-start mb-8">
+                                            <div>
+                                                <h3 className="text-white font-bold text-xl md:text-2xl tracking-tight">Status de Conformidade</h3>
+                                                <p className="text-gray-300 text-sm mt-1">Auditoria Contínua Ativa</p>
+                                            </div>
+                                            <div className="border border-hiro-green px-3 py-1.5 flex items-center gap-2 rounded">
+                                                <i className="ph-bold ph-shield-check text-hiro-green text-sm"></i>
+                                                <span className="text-hiro-green text-[10px] font-bold uppercase tracking-wider">Auditado ICP-Brasil</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-4 mb-8">
+                                            <div className="bg-hiro-navy/60 p-5 rounded-lg border border-white/5">
+                                                <p className="text-gray-400 text-xs mb-2">Risco Psicossocial (Nível)</p>
+                                                <div className="flex items-center gap-3">
+                                                    <span className="text-3xl font-black text-white">Baixo</span>
+                                                    <i className="ph-bold ph-activity text-hiro-green text-xl"></i>
+                                                </div>
+                                            </div>
+                                            <div className="bg-hiro-navy/60 p-5 rounded-lg border border-white/5">
+                                                <p className="text-gray-400 text-xs mb-2">Evidências Criptografadas</p>
+                                                <div className="flex items-center gap-3">
+                                                    <span className="text-3xl font-black text-white">12.4k</span>
+                                                    <i className="ph-bold ph-lock-key text-gray-400 text-xl"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-4 mb-4">
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-2.5 h-2.5 rounded-full bg-hiro-green shrink-0"></div>
+                                                <div className="flex-1 h-8 bg-hiro-navy/60 relative rounded overflow-hidden flex items-center">
+                                                    <div className="absolute top-0 left-0 h-full w-[80%] bg-hiro-green/20 border-r border-hiro-green"></div>
+                                                    <span className="relative z-10 left-3 text-[11px] text-white font-medium">Mapeamento Climático Realizado</span>
+                                                </div>
+                                                <span className="text-[10px] text-gray-400 font-mono shrink-0 w-14 text-right">10:42 AM</span>
+                                            </div>
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-2.5 h-2.5 rounded-full bg-[#4285F4] shrink-0"></div>
+                                                <div className="flex-1 h-8 bg-hiro-navy/60 relative rounded overflow-hidden flex items-center">
+                                                    <div className="absolute top-0 left-[20%] h-full w-[40%] bg-[#4285F4]/20 border-r border-[#4285F4]"></div>
+                                                    <span className="relative z-10 left-[23%] text-[11px] text-white font-medium">Intervenção Liderança</span>
+                                                </div>
+                                                <span className="text-[10px] text-gray-400 font-mono shrink-0 w-14 text-right">11:15 AM</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex justify-end mt-2">
+                                            <div className="bg-hiro-navy/60 p-2.5 rounded-full border border-white/5">
+                                                <i className="ph-bold ph-fingerprint text-hiro-green text-xl"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Wrapper do Conteúdo Restante (Com sombra e z-index elevado para o efeito cortina) */}
+                    <div className="relative z-30 bg-white shadow-[0_-40px_80px_rgba(0,0,0,0.9)] rounded-t-3xl md:rounded-t-[3rem] lg:rounded-t-[4rem] overflow-hidden pt-8">
+
+                        {/* --- 2. AUTORIDADE (ANDRÉ BENTO) --- */}
+                        <section id="autoridade" className="py-20 md:py-28 relative overflow-hidden bg-white">
+                            <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
+                                <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+                                    
+                                    {/* Imagem */}
+                                    <div className="w-full lg:w-5/12 reveal-left">
+                                        <div className="relative rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] group bg-hiro-blue">
+                                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80" 
+                                                 alt="André Bento" 
+                                                 className="w-full h-[500px] md:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-hiro-navy via-hiro-navy/40 to-transparent"></div>
+                                            <div className="absolute bottom-8 left-8 text-white">
+                                                <p className="font-black text-3xl md:text-4xl mb-1">André Bento</p>
+                                                <p className="text-xs md:text-sm text-hiro-green font-bold tracking-widest uppercase">Fundador HIRO & Ex-VP Oracle</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Textos */}
+                                    <div className="w-full lg:w-7/12 reveal-right delay-200">
+                                        <div className="flex flex-wrap gap-3 mb-6">
+                                            <span className="bg-gray-100 text-gray-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Missão Crítica</span>
+                                            <span className="bg-hiro-green/10 text-hiro-green text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Especialista IA</span>
+                                        </div>
+                                        
+                                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-hiro-blue leading-tight mb-8 text-balance tracking-tight">
+                                            A arquitetura da HIRO é assinada por quem lidera a tecnologia de <span className="text-hiro-green">missão crítica</span> no Brasil.
+                                        </h2>
+                                        
+                                        <div className="text-gray-600 text-base md:text-lg leading-relaxed space-y-6 font-medium">
+                                            <p>
+                                                Como <strong className="text-hiro-blue">Ex-Vice-Presidente da Oracle</strong>, André Bento esteve à frente da transformação digital de governos e grandes corporações, orquestrando projetos de altíssima complexidade ao lado de gigantes como <strong className="text-hiro-blue">NVIDIA, Intel e IBM</strong>.
+                                            </p>
+                                            <p>
+                                                Com um histórico que vai desde a prevenção de falhas sistêmicas em multinacionais como a <strong className="text-hiro-blue">Caterpillar</strong> até painéis de alta performance integrados à <strong className="text-hiro-blue">Red Bull Racing</strong>, André consolidou sua autoridade inquestionável em governança, IA e segurança de dados.
+                                            </p>
+                                        </div>
+
+                                        <div className="mt-8 border-l-4 border-hiro-green pl-6 py-2">
+                                            <p className="text-hiro-blue font-bold text-lg md:text-xl leading-relaxed text-pretty">
+                                                Hoje, ele aplica essa mesma engenharia de precisão – antes exclusiva de big techs – para construir o motor forense que blinda o seu RH contra passivos trabalhistas.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Reconhecimento no Mercado */}
+                                <div className="mt-20 pt-16 border-t border-gray-200 w-full reveal">
+                                    <p className="text-sm font-bold text-[#8fb4d8] uppercase tracking-widest mb-12 text-center">Presença, Palestras e Reconhecimento no Mercado:</p>
+                                    
+                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8 text-center">
+                                        <div className="flex flex-col items-center gap-3 group cursor-default">
+                                            <span className="font-black text-2xl tracking-tighter text-gray-500 group-hover:text-[#F80000] transition-colors duration-300 uppercase">Oracle</span>
+                                            <div className="flex flex-col items-center">
+                                                <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Executivo Oracle Brasil</span>
+                                                <span className="text-[10px] md:text-xs text-gray-400 max-w-[220px]">Ex-VP de Vendas e Setor Público, liderando projetos de missão crítica.</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="flex flex-col items-center gap-3 group cursor-default">
+                                            <div className="flex items-center gap-0.5">
+                                                <span className="font-bold text-2xl text-gray-500 group-hover:text-[#00C2FF] transition-colors duration-300 tracking-tight">tech</span>
+                                                <span className="font-light text-2xl text-gray-400 group-hover:text-gray-800 transition-colors duration-300 tracking-tight">trends</span>
+                                            </div>
+                                            <div className="flex flex-col items-center">
+                                                <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Tech Trends São Paulo</span>
+                                                <span className="text-[10px] md:text-xs text-gray-400 max-w-[220px]">Palestrante destaque exclusivo sobre Inteligência Artificial.</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="flex flex-col items-center gap-3 group cursor-default">
+                                            <span className="font-black text-2xl tracking-widest uppercase text-gray-500 group-hover:text-[#0C2340] transition-colors duration-300">SECOP</span>
+                                            <div className="flex flex-col items-center">
+                                                <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">SECOP Campfire</span>
+                                                <span className="text-[10px] md:text-xs text-gray-400 max-w-[220px]">Palestrante: "A Tecnologia como protagonista de mudança no Brasil".</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="flex flex-col items-center gap-3 group cursor-default">
+                                            <span className="font-black text-lg text-white bg-gray-500 group-hover:bg-[#1A365D] transition-colors duration-300 px-3 py-1 tracking-widest uppercase">TI Inside</span>
+                                            <div className="flex flex-col items-center">
+                                                <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Portal TI Inside</span>
+                                                <span className="text-[10px] md:text-xs text-gray-400 max-w-[220px]">Articulista focado em IA: "Empoderando municípios brasileiros".</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="flex flex-col items-center gap-3 group cursor-default">
+                                            <span className="font-black text-xl tracking-tight text-gray-500 group-hover:text-[#0052CC] transition-colors duration-300 uppercase">Fórum de Inovação</span>
+                                            <div className="flex flex-col items-center">
+                                                <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Fórum de Inovação SP</span>
+                                                <span className="text-[10px] md:text-xs text-gray-400 max-w-[220px]">Debates sobre futuro dos dados com líderes da NVIDIA e WideLabs.</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="flex flex-col items-center gap-3 group cursor-default">
+                                            <span className="font-black text-xl italic text-gray-500 group-hover:text-[#E21B22] transition-colors duration-300 uppercase">Red Bull Racing</span>
+                                            <div className="flex flex-col items-center">
+                                                <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Red Bull / Volaris</span>
+                                                <span className="text-[10px] md:text-xs text-gray-400 max-w-[220px]">Apresentação focada na tríade: "Homem, Máquina e Tecnologia".</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Empresas que confiaram */}
+                                <div className="mt-20 pt-16 border-t border-gray-200 w-full reveal delay-100">
+                                    <p className="text-sm font-bold text-[#8fb4d8] uppercase tracking-widest mb-10 text-center">Empresas que já confiaram no André Bento</p>
+                                    <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16">
+                                        <span className="font-black text-3xl md:text-4xl tracking-tighter uppercase text-gray-400 hover:text-[#F80000] transition-colors duration-300 cursor-default">Oracle</span>
+                                        <span className="font-black text-3xl md:text-4xl tracking-widest uppercase text-gray-400 hover:text-[#0530AD] transition-colors duration-300 cursor-default">IBM</span>
+                                        <span className="font-black text-2xl md:text-3xl uppercase tracking-tight text-gray-400 hover:text-[#FF8000] transition-colors duration-300 cursor-default">Thomson Reuters</span>
+                                        <span className="font-black text-3xl md:text-4xl uppercase tracking-tighter text-gray-400 hover:text-[#FFB300] transition-colors duration-300 cursor-default">Caterpillar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* --- 3. O RISCO NR-1 (DOR) --- */}
+                        <section id="problema" className="py-24 md:py-32 relative overflow-hidden bg-hiro-navy">
+                            <div className="absolute inset-0 w-full h-[140%] -top-[20%] z-0 parallax-wrapper" data-speed="0.2">
+                                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1920&auto=format&fit=crop" 
+                                     alt="Fundo Jurídico" 
+                                     className="w-full h-full object-cover animate-slow-zoom opacity-10 grayscale mix-blend-luminosity" />
+                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-b from-hiro-navy/95 via-hiro-navy/80 to-hiro-navy/95 z-0"></div>
+
+                            <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-20 text-center">
+                                <div className="inline-flex items-center justify-center p-4 bg-red-500/10 border border-red-500/20 rounded-full mb-8 reveal">
+                                    <i className="ph-bold ph-warning-circle text-red-500 text-3xl"></i>
+                                </div>
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-white mb-6 leading-tight reveal delay-100 text-balance mx-auto">
+                                    O que o auditor vai buscar após <br className="hidden md:block"/>
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">26 de maio?</span>
+                                </h2>
+
+                                <div className="grid md:grid-cols-3 gap-8 mt-16 lg:mt-24">
+                                    {[
+                                        {
+                                            title: "Evidências Frágeis",
+                                            desc: "Falta de composto probatório sólido validado em tempo real, onde o risco de condenação na justiça trabalhista é iminente."
+                                        },
+                                        {
+                                            title: "Histórico",
+                                            desc: "Plataformas sem rastreabilidade e segurança para proteger o sigilo médico de dados sensíveis."
+                                        },
+                                        {
+                                            title: "Descobrir casos",
+                                            desc: "Casos de burnout, assédio ou liderança tóxica apenas quando a citação do processo judicial chega."
+                                        }
+                                    ].map((item, i) => (
+                                        <div key={i} className={`glass-card p-8 md:p-10 rounded-3xl hover:border-red-500/40 transition-all duration-500 group reveal shadow-xl hover:-translate-y-2 delay-${(i%3)*100}`}>
+                                            <div className="w-14 h-14 bg-red-500/10 text-red-500 rounded-2xl flex items-center justify-center mb-6 border border-red-500/20 group-hover:scale-110 group-hover:bg-red-500 group-hover:text-white transition-all duration-300">
+                                                <i className="ph-bold ph-x text-2xl"></i>
+                                            </div>
+                                            <h3 className="text-2xl font-black text-white mb-4 uppercase tracking-tight">{item.title}</h3>
+                                            <p className="text-gray-300 leading-relaxed font-medium">{item.desc}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* --- 4. DIFERENCIAIS (Com x Sem HIRO) --- */}
+                        <section id="diferenciais" className="py-24 md:py-32 bg-hiro-blue relative overflow-hidden border-t border-white/5">
+                            <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
+                                <div className="text-center mb-16 lg:mb-24 reveal">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white drop-shadow-md leading-tight text-balance mx-auto">
+                                        O problema não é cumprir a norma. <br/>
+                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-hiro-green to-teal-200">É provar que você cumpre.</span>
+                                    </h2>
+                                </div>
+
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+                                    
+                                    {/* Sem Governança */}
+                                    <div className="bg-hiro-navy/80 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 hover:bg-hiro-navy hover:border-red-500/40 transition-all duration-500 reveal-left group shadow-xl">
+                                        <div className="flex items-center gap-5 mb-10">
+                                            <div className="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center border border-red-500/20 group-hover:scale-110 transition-transform">
+                                                <i className="ph-bold ph-file-x text-red-500 text-3xl"></i>
+                                            </div>
+                                            <h3 className="text-3xl font-black text-gray-300 uppercase tracking-tight group-hover:text-white transition-colors">Sem o HIRO</h3>
+                                        </div>
+                                        <ul className="space-y-6 md:space-y-8">
+                                            {[
+                                                'Planilhas e documentos dispersos',
+                                                'Subjetividade nas análises',
+                                                'Ausência de prova estruturada',
+                                                'Risco jurídico altíssimo em auditoria'
+                                            ].map((text, i) => (
+                                                <li key={i} className="flex items-start gap-4 group/item">
+                                                    <div className="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center shrink-0">
+                                                        <i className="ph-bold ph-x text-red-500 text-lg"></i>
+                                                    </div>
+                                                    <span className="text-gray-300 font-medium text-lg mt-0.5">{text}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    {/* Com Governança */}
+                                    <div className="bg-gradient-to-br from-hiro-navy to-[#08111e] backdrop-blur-2xl border-2 border-hiro-green/50 rounded-[2.5rem] p-8 md:p-12 transform lg:-translate-y-6 shadow-[0_20px_40px_rgba(0,209,142,0.1)] hover:shadow-[0_30px_60px_rgba(0,209,142,0.2)] hover:border-hiro-green transition-all duration-500 reveal-right group relative">
+                                        <div className="absolute -top-4 right-8 bg-hiro-green text-hiro-navy text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg">
+                                            Padrão Ouro
+                                        </div>
+                                        <div className="flex items-center gap-5 mb-10 mt-2 sm:mt-0">
+                                            <div className="w-16 h-16 rounded-2xl bg-hiro-green flex items-center justify-center shadow-[0_0_20px_rgba(0,209,142,0.4)] group-hover:scale-110 transition-transform">
+                                                <i className="ph-bold ph-shield-check text-hiro-navy text-3xl"></i>
+                                            </div>
+                                            <h3 className="text-3xl font-black text-white uppercase tracking-tight">Com o HIRO</h3>
+                                        </div>
+                                        <ul className="space-y-6 md:space-y-8">
+                                            {[
+                                                'Evidência versionada e imutável',
+                                                'Auditoria automática de 100%',
+                                                'Rastreabilidade forense',
+                                                'Pronto para fiscalização amanhã'
+                                            ].map((text, i) => (
+                                                <li key={i} className="flex items-start gap-4 group/item">
+                                                    <div className="w-8 h-8 rounded-full bg-hiro-green/20 flex items-center justify-center shrink-0">
+                                                        <i className="ph-bold ph-check text-hiro-green text-lg"></i>
+                                                    </div>
+                                                    <span className="text-white font-bold text-lg mt-0.5">{text}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* --- 5. A ÚNICA PROVA IRREFUTÁVEL --- */}
+                        <section id="prova" className="py-24 md:py-32 bg-hiro-navy relative overflow-hidden border-t border-white/5">
+                            <div className="absolute inset-0 w-full h-[140%] -top-[20%] parallax-wrapper" data-speed="0.15">
+                                <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1920&auto=format&fit=crop" 
+                                     alt="Tecnologia e Dados" 
+                                     className="w-full h-full object-cover animate-slow-zoom opacity-[0.08] mix-blend-screen" />
+                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-b from-[#08111e]/40 via-hiro-navy/60 to-hiro-navy/90 z-0"></div>
+                            
+                            <div className="max-w-5xl mx-auto px-6 relative z-20 text-center reveal">
+                                <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-white mb-6 leading-tight text-balance mx-auto">
+                                    A única prova irrefutável <br className="hidden md:block"/> do mercado brasileiro.
+                                </h2>
+                                <p className="text-base md:text-lg text-gray-300 mb-14 font-medium max-w-3xl mx-auto leading-relaxed text-pretty">
+                                    Enquanto as ferramentas genéricas não resistem a uma perícia básica, nós entregamos o <strong className="text-hiro-green font-bold">Padrão Ouro</strong>. Selamos seus relatórios com o Relógio Atômico (RFC 3161). O tempo da prova é real, imutável e irrefutável.
+                                </p>
+
+                                <div className="glass-card p-6 md:p-8 rounded-2xl inline-flex flex-col text-left transform hover:scale-105 transition-transform duration-500 cursor-crosshair shadow-2xl border-white/10 w-full sm:w-auto mx-auto bg-hiro-blue/80 backdrop-blur-xl">
+                                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-5 border-b border-white/10 pb-5">
+                                        <div className="w-12 h-12 rounded-xl bg-hiro-green/10 text-hiro-green flex items-center justify-center shrink-0">
+                                            <i className="ph-bold ph-fingerprint text-3xl"></i>
+                                        </div>
+                                        <div className="overflow-hidden">
+                                            <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">HASH GERADO (COMPOSIÇÃO PROBATÓRIA)</p>
+                                            <p className="font-mono text-white text-sm md:text-base font-bold tracking-wider">a2b8...9f4c [VERIFICADO E BLINDADO]</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <i className="ph-bold ph-check-circle text-hiro-green text-xl"></i>
+                                        <p className="text-sm md:text-base font-bold text-white tracking-wide">Carimbo de Tempo ICP-Brasil Anexado</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* --- 6. A SOLUÇÃO (FUNCIONALIDADES / CARROSSEL) --- */}
+                        <section id="estrutura" className="py-24 md:py-32 bg-hiro-blue relative overflow-hidden border-t border-white/5">
+                            <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
+                                <div className="text-center mb-16 lg:mb-24 reveal">
+                                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white mb-4 leading-tight text-balance mx-auto">Ver Funcionalidades</h2>
+                                    <p className="text-lg md:text-xl text-hiro-green font-bold tracking-widest uppercase">HIRO: O SUPER PODER do novo RH de alta perfomance</p>
+                                </div>
+
+                                <div className="flex flex-col lg:flex-row gap-12 items-center bg-hiro-navy p-6 md:p-10 rounded-[2.5rem] border border-white/5 shadow-2xl reveal delay-100">
+                                    
+                                    <div className="w-full lg:w-1/2 flex flex-col gap-4">
+                                        {heroFeatures.map((feature, index) => {
+                                            const isActive = activeFeature === index;
+                                            return (
+                                                <div 
+                                                    key={feature.id} 
+                                                    onClick={() => setActiveFeature(index)}
+                                                    className={`cursor-pointer transition-all duration-300 p-6 md:p-8 border-l-4 rounded-r-2xl ${isActive ? 'bg-hiro-blue/40 border-hiro-green shadow-md' : 'bg-transparent border-transparent hover:bg-white/5'}`}
+                                                >
+                                                    <div className="flex items-center gap-4 mb-3">
+                                                        <div className={`p-3 rounded-xl transition-colors ${isActive ? 'bg-hiro-green/20 text-hiro-green' : 'bg-gray-800 text-gray-400'}`}>
+                                                            <i className={`ph-bold ${feature.icon} text-2xl`}></i>
+                                                        </div>
+                                                        <h3 className={`text-xl md:text-2xl font-black uppercase tracking-tight transition-colors ${isActive ? 'text-white' : 'text-gray-400'}`}>{feature.title}</h3>
+                                                    </div>
+                                                    <p className={`text-sm md:text-base leading-relaxed ml-[4.5rem] font-medium transition-all ${isActive ? 'text-gray-300 block' : 'hidden'}`}>
+                                                        {feature.desc}
+                                                    </p>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+
+                                    <div className="w-full lg:w-1/2">
+                                        <div className="relative w-full h-[400px] md:h-[500px] rounded-[2rem] overflow-hidden shadow-2xl bg-hiro-blue border border-white/10">
+                                            <img 
+                                                src={heroFeatures[activeFeature].img} 
+                                                alt={heroFeatures[activeFeature].title}
+                                                className="absolute inset-0 w-full h-full object-cover opacity-60 animate-[reveal_0.5s_ease-in-out] grayscale mix-blend-luminosity"
+                                                key={heroFeatures[activeFeature].id} 
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-hiro-navy via-transparent to-transparent opacity-90"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* --- 7. ROI E IMPACTO --- */}
+                        <section id="roi" className="py-24 md:py-32 bg-hiro-navy relative overflow-hidden border-t border-white/5">
+                            <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
+                                <div className="text-center mb-16 lg:mb-24 reveal">
+                                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white mb-6 text-balance mx-auto">Segurança que gera valor real de mercado.</h2>
+                                    <p className="text-lg md:text-xl text-gray-400 font-bold uppercase tracking-widest">Não é apenas defesa. É inteligência financeira para o Board.</p>
+                                </div>
+
+                                <div className="grid md:grid-cols-3 gap-8">
+                                    {[
+                                        { metric: "R$ 2,3M", desc: "Economia média anual em custos de processos e multas (Base 700 func.)", icon: "ph-chart-line-up" },
+                                        { metric: "Retenção", desc: "Queda drástica no turnover ao mapear falhas antes da saída do talento.", icon: "ph-users" },
+                                        { metric: "Estratégia", desc: "O RH deixa de ser setor de custo operacional e vira braço direito do conselho.", icon: "ph-strategy" }
+                                    ].map((item, i) => (
+                                        <div key={i} className={`glass-card p-10 md:p-12 rounded-[2.5rem] text-center hover:border-hiro-green/50 transition-all duration-500 group reveal shadow-xl hover:-translate-y-2 delay-${(i%3)*100}`}>
+                                            <div className="w-20 h-20 rounded-2xl bg-hiro-navy border border-gray-700 mx-auto flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-hiro-green group-hover:border-hiro-green transition-all duration-300 shadow-inner">
+                                                <i className={`ph-bold ${item.icon} text-4xl text-hiro-green group-hover:text-hiro-navy transition-colors`}></i>
+                                            </div>
+                                            <h3 className="text-4xl lg:text-5xl font-black text-white uppercase tracking-tighter mb-4">{item.metric}</h3>
+                                            <p className="text-gray-300 font-medium leading-relaxed text-sm md:text-base">{item.desc}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* --- 8. FAQ --- */}
+                        <section id="faq" className="py-20 md:py-28 bg-hiro-blue relative overflow-hidden border-t border-white/5">
+                            <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-20 reveal">
+                                <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-white mb-12 text-center text-balance">Dúvidas sobre a Conformidade NR-1?</h2>
+                                <div className="space-y-4">
+                                    {faqs.map((faq, i) => (
+                                        <div 
+                                            key={i} 
+                                            className={`glass-card rounded-2xl cursor-pointer transition-all duration-300 overflow-hidden border ${openFAQ === i ? 'border-hiro-green shadow-[0_0_20px_rgba(0,209,142,0.1)]' : 'border-white/10 hover:border-white/30'}`}
+                                            onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
+                                        >
+                                            <div className="flex justify-between items-center p-6 sm:p-8 font-bold text-lg text-white">
+                                                <span className="pr-4">{faq.q}</span>
+                                                <i className={`ph-bold ph-caret-down text-xl transition-transform duration-300 shrink-0 ${openFAQ === i ? 'rotate-180 text-hiro-green' : 'text-gray-400'}`}></i>
+                                            </div>
+                                            <div className={`overflow-hidden transition-all duration-300 bg-hiro-navy/50 ${openFAQ === i ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                                <div className="p-6 sm:p-8 pt-0 text-gray-300 font-medium leading-relaxed border-t border-white/5 mt-2 text-sm md:text-base">
+                                                    {faq.a}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* --- 9. CTA FINAL / FORMULARIO --- */}
+                        <section id="contato" className="py-24 md:py-32 bg-hiro-navy relative overflow-hidden border-t border-white/5">
+                            <div className="absolute top-0 left-[-50%] w-[200%] h-full bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 translate-x-full animate-[shine_5s_infinite] pointer-events-none"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-hiro-navy to-transparent z-0 pointer-events-none"></div>
+                            
+                            <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-20 flex flex-col lg:flex-row gap-16 items-center">
+                                
+                                <div className="w-full lg:w-1/2 reveal-left">
+                                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight uppercase tracking-tighter text-balance">
+                                        Dar o próximo passo leva <br/>
+                                        <span className="text-hiro-green">menos de um minuto</span>
+                                    </h2>
+                                    
+                                    <div className="mt-12 space-y-10">
+                                        <div className="flex gap-6">
+                                            <div className="w-14 h-14 rounded-2xl border-2 border-hiro-green text-hiro-green flex items-center justify-center font-black text-2xl shrink-0 bg-hiro-green/10">1</div>
+                                            <div>
+                                                <h3 className="text-2xl font-black text-white mb-3 uppercase tracking-wide">Preencha o formulário</h3>
+                                                <p className="text-gray-400 leading-relaxed font-medium text-lg text-pretty">Envie suas informações corporativas. Todos os seus dados estarão seguros e protegidos pela nossa criptografia.</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-6">
+                                            <div className="w-14 h-14 rounded-2xl border-2 border-hiro-green text-hiro-green flex items-center justify-center font-black text-2xl shrink-0 bg-hiro-green/10">2</div>
+                                            <div>
+                                                <h3 className="text-2xl font-black text-white mb-3 uppercase tracking-wide">Receba uma ligação</h3>
+                                                <p className="text-gray-400 leading-relaxed font-medium text-lg text-pretty">Um dos nossos diretores fará uma ligação para entender seu cenário e agendar uma demonstração do copiloto.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="w-full lg:w-1/2 reveal-right delay-200 max-w-md mx-auto lg:max-w-none">
+                                    <div className="glass-card p-8 md:p-12 rounded-[2.5rem] shadow-2xl border-t-2 border-white/10 hover:border-hiro-green/40 transition-colors duration-500 relative group overflow-hidden bg-hiro-blue/30">
+                                        <div className="absolute -inset-2 bg-gradient-to-r from-transparent via-hiro-green/10 to-transparent rotate-45 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 animate-[shine_4s_infinite] pointer-events-none"></div>
+
+                                        <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
+                                            <div>
+                                                <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">Nome Completo</label>
+                                                <input type="text" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-cardBlue/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
+                                            </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">E-mail Corporativo</label>
+                                                    <input type="email" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-cardBlue/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">WhatsApp</label>
+                                                    <input type="tel" required value={formData.whatsapp} onChange={e => setFormData({...formData, whatsapp: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-cardBlue/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
+                                                </div>
+                                            </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">Cargo</label>
+                                                    <input type="text" required value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-cardBlue/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">Empresa</label>
+                                                    <input type="text" required value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-cardBlue/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">Número de funcionários</label>
+                                                <select required value={formData.size} onChange={e => setFormData({...formData, size: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-cardBlue/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm cursor-pointer appearance-none">
+                                                    <option value="" disabled>Selecione o tamanho da empresa</option>
+                                                    <option value="1-49">1 a 49 funcionários</option>
+                                                    <option value="50-99">50 a 99 funcionários</option>
+                                                    <option value="100-499">100 a 499 funcionários</option>
+                                                    <option value="500+">Acima de 500 funcionários</option>
+                                                </select>
+                                            </div>
+                                            <div className="pt-4">
+                                                <button type="submit" className="btn-shine w-full bg-hiro-green text-hiro-navy hover:bg-hiro-greenHover font-black uppercase tracking-widest py-5 rounded-xl text-lg transition-all transform hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,209,142,0.4)] flex justify-center items-center gap-3">
+                                                    Solicitar contato
+                                                    <i className="ph-bold ph-paper-plane-right text-2xl"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* FOOTER */}
+                        <footer className="bg-hiro-navy text-gray-500 py-12 md:py-16 text-center text-sm border-t border-white/5">
+                            <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
+                                <a href="#inicio" onClick={(e) => scrollToSection(e, 'inicio')} className="mb-10 transition-transform duration-500 inline-block hover:scale-105">
+                                    <img 
+                                        src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663112691788/BxsOqkAxwEutpZHT.png" 
+                                        alt="HIRO Logo" 
+                                        className="h-12 sm:h-16 lg:h-20 w-auto brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300" 
+                                    />
+                                </a>
+                                <p className="mb-3 font-bold text-gray-400 uppercase tracking-widest text-xs">HIRO GOVERNANCE TECH - Inteligência Humana e Otimização Responsável</p>
+                                <p className="mb-8 font-medium text-xs">Todos os direitos reservados © 2026</p>
+                            </div>
+                        </footer>
+
+                    </div> {/* Fim Wrapper Sombra Superior */}
+
+                    {/* --- MODAL DE VÍDEO --- */}
+                    {isVideoModalOpen && (
+                        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-hiro-navy/95 backdrop-blur-sm p-4">
+                            <div className="bg-black w-full max-w-4xl aspect-video relative rounded-2xl overflow-hidden shadow-2xl border border-gray-700 animate-[reveal_0.3s_ease-out] active">
+                                <button 
+                                    onClick={() => setIsVideoModalOpen(false)}
+                                    className="absolute top-6 right-6 z-20 text-white bg-white/10 hover:bg-hiro-green hover:text-hiro-navy w-12 h-12 flex items-center justify-center rounded-full transition-colors backdrop-blur-md"
+                                >
+                                    <i className="ph-bold ph-x text-2xl"></i>
+                                </button>
+                                
+                                <div className="absolute inset-0 flex flex-col items-center justify-center bg-hiro-navy text-gray-400">
+                                    <i className="ph-fill ph-play-circle text-6xl text-hiro-green/50 mb-4 animate-pulse"></i>
+                                    <p className="font-bold uppercase tracking-widest text-sm">Vídeo Demonstrativo HIRO rodando...</p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<HiroApp />);
+    </script>
+</body>
+</html>
