@@ -12,8 +12,8 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Phosphor Icons (Pinned version for stability) -->
+    <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -178,33 +178,36 @@
     <!-- React & ReactDOM -->
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.24.4/babel.min.js"></script>
 </head>
 <body class="bg-hiro-secondaryDark text-white selection:bg-hiro-primary selection:text-hiro-tertiary">
     <div id="root"></div>
 
-    <script type="text/babel">
+    <script type="text/babel" data-presets="react,env">
+        /** @jsx React.createElement */
+        /** @jsxFrag React.Fragment */
+        
         const { useState, useEffect } = React;
 
         const heroFeatures = [
             {
                 id: 0,
                 title: "IA como Copiloto",
-                desc: "Automatiza pesquisas psicossociais e traduz o sentimento da equipe em dados claros. O RH abandona o trabalho braçal de planilhas e assume seu papel definitivo: o de protagonista na performance da empresa.",
+                desc: "Hero organiza, o RH decide. O RH assume seu papel de protagonista na performance da empresa.",
                 icon: "ph-users",
                 img: "https://github.com/v4silvaanchieta/hiro/blob/main/ChatGPT%20Image%2014%20de%20mai.%20de%202026,%2016_51_42.png?raw=true"
             },
             {
                 id: 1,
                 title: "Relógio atômico",
-                desc: "O judiciário brasileiro sofre com provas subjetivas. A HIRO fornece um verdadeiro escudo para seus advogados: cada relatório é selado com o Relógio Atômico (RFC 3161) e assinatura ICP-Brasil, provando diligência de forma irrefutável.",
+                desc: "As empresas brasileiras sofrem com geração de provas subjetivas. Hero fornece um verdadeiro escudo para empresas e advogados, assinando o relatório com relógio atômico e autenticidade do ICP Brasil",
                 icon: "ph-fingerprint",
                 img: "https://github.com/v4silvaanchieta/hiro/blob/main/ChatGPT%20Image%2014%20de%20mai.%20de%202026,%2016_53_25.png?raw=true"
             },
             {
                 id: 2,
                 title: "Solução especialista",
-                desc: "Muitas soluções no mercado são sistemas genéricos que fizeram um 'puxadinho' para vender NR-1. A HIRO nasceu exclusivamente para isso: entregamos o ciclo completo, do mapeamento preventivo à gestão da intervenção.",
+                desc: "Muitas soluções são genéricas adaptadas para a nova NR1. A HIRO nasceu exclusivamente para isso: entregamos o ciclo completo, do mapeamento preventivo à gestão da intervenção.",
                 icon: "ph-layers",
                 img: "https://github.com/v4silvaanchieta/hiro/blob/main/ChatGPT%20Image%2014%20de%20mai.%20de%202026,%2016_54_44.png?raw=true"
             },
@@ -388,8 +391,8 @@
                                 
                                 <h1 className="text-[2.75rem] sm:text-5xl lg:text-[4.8rem] font-black tracking-tighter mb-6 leading-[1.05] text-white text-balance text-left mx-auto lg:mx-0">
                                     Único sistema <br className="hidden sm:block"/>
-                                    de validade <br className="hidden sm:block"/>
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-hiro-primary to-[#A3D3FF]">forense do <br className="hidden sm:block"/> Brasil</span>
+                                    com validade <br className="hidden sm:block"/>
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-hiro-primary to-[#A3D3FF]">forense no <br className="hidden sm:block"/> Brasil</span>
                                 </h1>
                                 
                                 <p className="text-lg md:text-xl mb-10 font-medium text-gray-200 max-w-xl mx-auto lg:mx-0 leading-relaxed text-pretty text-left">
@@ -500,7 +503,7 @@
                                             <div className="absolute inset-0 bg-gradient-to-t from-hiro-secondaryDark via-hiro-secondaryDark/40 to-transparent"></div>
                                             <div className="absolute bottom-8 left-8 text-white">
                                                 <p className="font-black text-3xl md:text-4xl mb-1">André Bento</p>
-                                                <p className="text-xs md:text-sm text-hiro-primary font-bold tracking-widest uppercase">Fundador HIRO & Ex-VP Oracle</p>
+                                                <p className="text-xs md:text-sm text-hiro-primary font-bold tracking-widest uppercase">Fundador HIRO</p>
                                             </div>
                                         </div>
                                     </div>
@@ -518,16 +521,24 @@
                                         
                                         <div className="text-gray-600 text-base md:text-lg leading-relaxed space-y-6 font-medium">
                                             <p>
-                                                Como <strong className="text-hiro-secondary">Ex-Vice-Presidente da Oracle</strong>, André Bento esteve à frente da transformação digital de governos e grandes corporações, orquestrando projetos de altíssima complexidade ao lado de gigantes como <strong className="text-hiro-secondary">NVIDIA, Intel e IBM</strong>.
-                                            </p>
-                                            <p>
-                                                Com um histórico que vai desde a prevenção de falhas sistêmicas em multinacionais como a <strong className="text-hiro-secondary">Caterpillar</strong> até painéis de alta performance integrados à <strong className="text-hiro-secondary">Red Bull Racing</strong>, André consolidou sua autoridade inquestionável em governança, IA e segurança de dados.
+                                                André Bento foi <strong className="text-hiro-secondary"> Vice-Presidente da Oracle </strong> e esteve à frente da transformação digital do governo brasileiro e de grandes corporações, orquestrando projetos de altíssima complexidade ao lado de <strong className="text-hiro-secondary"> gigantes da tecnologia</strong>.
                                             </p>
                                         </div>
 
                                         <div className="mt-8 border-l-4 border-hiro-primary pl-6 py-2">
                                             <p className="text-hiro-secondary font-bold text-lg md:text-xl leading-relaxed text-pretty">
                                                 Hoje, ele aplica essa mesma engenharia para construir o <strong className="text-hiro-primary">novo padrão ouro do Brasil</strong>.
+                                            </p>
+                                        </div>
+                                        
+                                        <div className="mt-6 flex flex-col items-start bg-gray-50/60 p-5 rounded-2xl border border-gray-100/80 shadow-sm relative overflow-hidden group">
+                                            <svg width="46" height="18" viewBox="0 0 46 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-3 opacity-90 drop-shadow-sm transition-transform group-hover:scale-105">
+                                                <path d="M3 7C11 3 17 11 25 7C29 5 35 9 41 7" stroke="#009C3B" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+                                                <path d="M5 10C13 6 19 14 27 10C31 8 37 12 43 10" stroke="#FFDF00" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                                                <path d="M7 13C15 9 21 17 29 13C33 11 39 15 45 13" stroke="#002776" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                            </svg>
+                                            <p className="text-gray-600 font-semibold text-sm md:text-base italic leading-relaxed">
+                                                "Uma IA feita por brasileiros, com a cultura dos brasileiros, conhecendo as leis brasileiras."
                                             </p>
                                         </div>
                                     </div>
@@ -630,7 +641,7 @@
                                     <i className="ph-bold ph-warning-circle text-red-500 text-3xl"></i>
                                 </div>
                                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-white mb-6 leading-tight reveal delay-100 text-balance mx-auto">
-                                    O que o auditor vai buscar após <br className="hidden md:block"/>
+                                    O que o auditor está buscando a partir<br className="hidden md:block"/>
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">26 de maio?</span>
                                 </h2>
 
@@ -679,10 +690,13 @@
                                             <div className="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center border border-red-500/20 group-hover:scale-110 transition-transform">
                                                 <i className="ph-bold ph-file-x text-red-500 text-3xl"></i>
                                             </div>
-                                            <h3 className="text-3xl font-black text-gray-300 uppercase tracking-tight group-hover:text-white transition-colors">Sem o HIRO</h3>
+                                            <h3 className="text-3xl font-black text-gray-300 uppercase tracking-tight group-hover:text-white transition-colors">Sem HIRO</h3>
                                         </div>
-                                        <ul className="space-y-6 md:space-y-8">
+                                        <ul className="space-y-4 md:space-y-5">
                                             {[
+                                                'Apenas um simples relatório',
+                                                'Risco de LGPD',
+                                                'Teste cobrados a cada aplicação',
                                                 'Planilhas e documentos dispersos',
                                                 'Subjetividade nas análises',
                                                 'Ausência de prova estruturada',
@@ -707,14 +721,17 @@
                                             <div className="w-16 h-16 rounded-2xl bg-hiro-primary flex items-center justify-center shadow-[0_0_20px_rgba(80,168,251,0.4)] group-hover:scale-110 transition-transform">
                                                 <i className="ph-bold ph-shield-check text-white text-3xl"></i>
                                             </div>
-                                            <h3 className="text-3xl font-black text-white uppercase tracking-tight">Com o HIRO</h3>
+                                            <h3 className="text-3xl font-black text-white uppercase tracking-tight">Com HIRO</h3>
                                         </div>
-                                        <ul className="space-y-6 md:space-y-8">
+                                        <ul className="space-y-4 md:space-y-5">
                                             {[
+                                                'Relatório completo com validade forense',
+                                                'Adequado as diretrizes LGPD',
+                                                'Sem limite para aplicação de testes',
                                                 'Evidência versionada e imutável',
                                                 'Auditoria automática de 100%',
                                                 'Rastreabilidade forense',
-                                                'Pronto para fiscalização amanhã'
+                                                'Pronto para fiscalização hoje'
                                             ].map((text, i) => (
                                                 <li key={i} className="flex items-start gap-4 group/item">
                                                     <div className="w-8 h-8 rounded-full bg-hiro-primary/20 flex items-center justify-center shrink-0">
@@ -747,20 +764,48 @@
                                     Enquanto as ferramentas genéricas não resistem a uma perícia básica, nós entregamos o <strong className="text-hiro-primary font-bold">Padrão Ouro</strong>. Selamos seus relatórios com o Relógio Atômico (RFC 3161). O tempo da prova é real, imutável e irrefutável.
                                 </p>
 
-                                <div className="glass-card p-6 md:p-8 rounded-2xl inline-flex flex-col text-left transform hover:scale-105 transition-transform duration-500 cursor-crosshair shadow-2xl border-white/10 w-full sm:w-auto mx-auto bg-hiro-secondary/80 backdrop-blur-xl">
-                                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-5 border-b border-white/10 pb-5">
-                                        <div className="w-12 h-12 rounded-xl bg-hiro-primary/10 text-hiro-primary flex items-center justify-center shrink-0">
-                                            <i className="ph-bold ph-fingerprint text-3xl"></i>
+                                <div className="glass-card p-6 md:p-10 rounded-[2rem] inline-flex flex-col text-left transform hover:scale-105 transition-transform duration-500 cursor-crosshair shadow-2xl border-white/10 w-full sm:w-auto mx-auto bg-hiro-secondary/80 backdrop-blur-xl relative">
+                                    
+                                    {/* Etapa 1 */}
+                                    <div className="flex items-start gap-5 relative">
+                                        {/* Linha vertical conectora */}
+                                        <div className="absolute left-[23px] top-[45px] bottom-[-15px] w-[2px] bg-gradient-to-b from-hiro-primary to-hiro-primary/20"></div>
+                                        
+                                        <div className="w-12 h-12 rounded-xl bg-hiro-primary/10 text-hiro-primary flex items-center justify-center shrink-0 relative z-10 border border-hiro-primary/20 shadow-inner">
+                                            <span className="absolute -top-2 -right-2 w-5 h-5 bg-[#0F2030] border border-hiro-primary text-hiro-primary rounded-full flex items-center justify-center text-[10px] font-black">1</span>
+                                            <i className="ph-bold ph-fingerprint text-2xl"></i>
                                         </div>
-                                        <div className="overflow-hidden">
+                                        <div className="pb-8 pt-1">
                                             <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">HASH GERADO (COMPOSIÇÃO PROBATÓRIA)</p>
-                                            <p className="font-mono text-white text-sm md:text-base font-bold tracking-wider">a2b8...9f4c [VERIFICADO E BLINDADO]</p>
+                                            <p className="font-mono text-white text-sm md:text-base font-bold tracking-wider">a2b8...9f4c <span className="text-hiro-green ml-1">[VERIFICADO]</span></p>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-3">
-                                        <i className="ph-bold ph-check-circle text-hiro-primary text-xl"></i>
-                                        <p className="text-sm md:text-base font-bold text-white tracking-wide">Carimbo de Tempo ICP-Brasil Anexado</p>
+
+                                    {/* Etapa 2 */}
+                                    <div className="flex items-start gap-5 relative">
+                                        {/* Linha vertical conectora */}
+                                        <div className="absolute left-[23px] top-[45px] bottom-[-15px] w-[2px] bg-gradient-to-b from-hiro-primary/20 to-hiro-green/50"></div>
+                                        
+                                        <div className="w-12 h-12 rounded-xl bg-hiro-primary/5 text-hiro-primary flex items-center justify-center shrink-0 relative z-10 border border-white/5">
+                                            <span className="absolute -top-2 -right-2 w-5 h-5 bg-[#0F2030] border border-hiro-primary/50 text-hiro-primary rounded-full flex items-center justify-center text-[10px] font-black">2</span>
+                                            <i className="ph-bold ph-clock text-2xl"></i>
+                                        </div>
+                                        <div className="pb-8 pt-3">
+                                            <p className="text-sm md:text-base font-bold text-white tracking-wide leading-tight">Carimbo de tempo com relógio atômico certificado</p>
+                                        </div>
                                     </div>
+
+                                    {/* Etapa 3 */}
+                                    <div className="flex items-start gap-5 relative">
+                                        <div className="w-12 h-12 rounded-xl bg-hiro-green/10 text-hiro-green flex items-center justify-center shrink-0 relative z-10 border border-hiro-green/30 shadow-[0_0_15px_rgba(0,209,142,0.2)]">
+                                            <span className="absolute -top-2 -right-2 w-5 h-5 bg-[#0F2030] border border-hiro-green text-hiro-green rounded-full flex items-center justify-center text-[10px] font-black">3</span>
+                                            <i className="ph-bold ph-seal-check text-2xl"></i>
+                                        </div>
+                                        <div className="pt-3">
+                                            <p className="text-sm md:text-base font-bold text-white tracking-wide leading-tight">Assinatura HIRO Autenticidade ICP-Brasil</p>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </section>
@@ -911,31 +956,31 @@
                                         <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
                                             <div>
                                                 <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">Nome Completo</label>
-                                                <input type="text" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-primary transition-all shadow-inner text-sm" />
+                                                <input type="text" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
                                             </div>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">E-mail Corporativo</label>
-                                                    <input type="email" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-primary transition-all shadow-inner text-sm" />
+                                                    <input type="email" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">WhatsApp</label>
-                                                    <input type="tel" required value={formData.whatsapp} onChange={e => setFormData({...formData, whatsapp: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-primary transition-all shadow-inner text-sm" />
+                                                    <input type="tel" required value={formData.whatsapp} onChange={e => setFormData({...formData, whatsapp: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
                                                 </div>
                                             </div>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">Cargo</label>
-                                                    <input type="text" required value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-primary transition-all shadow-inner text-sm" />
+                                                    <input type="text" required value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">Empresa</label>
-                                                    <input type="text" required value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-primary transition-all shadow-inner text-sm" />
+                                                    <input type="text" required value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm" />
                                                 </div>
                                             </div>
                                             <div>
                                                 <label className="block text-xs font-bold text-gray-300 uppercase mb-2 tracking-wider">Número de funcionários</label>
-                                                <select required value={formData.size} onChange={e => setFormData({...formData, size: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-primary transition-all shadow-inner text-sm cursor-pointer appearance-none">
+                                                <select required value={formData.size} onChange={e => setFormData({...formData, size: e.target.value})} className="w-full px-5 py-4 rounded-xl bg-hiro-secondaryDark/80 border border-gray-600/50 text-white focus:outline-none focus:border-hiro-green transition-all shadow-inner text-sm cursor-pointer appearance-none">
                                                     <option value="" disabled>Selecione o tamanho da empresa</option>
                                                     <option value="1-49">1 a 49 funcionários</option>
                                                     <option value="50-99">50 a 99 funcionários</option>
